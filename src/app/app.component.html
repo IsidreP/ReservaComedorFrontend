@@ -1,26 +1,29 @@
-
 <app-header></app-header>
 
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" opened class="example-sidenav"
-               [fixedInViewport]="false" [fixedTopGap]="0"
-               [fixedBottomGap]="0">
-<!--                <a class="nav-link " routerLink="/plato">Catalogo platos</a>
-               <a class="nav-link" routerLink="/reserva">Hacer reserva</a>
-               <a class="nav-link" routerLink="/about"></a> -->
+  <mat-sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="false" [fixedTopGap]="0"
+    [fixedBottomGap]="0">
 
-               <mat-selection-list #shoes [multiple]="false">
-                <a class="nav-link" routerLink="/plato">
-                  <mat-list-option>
-                  Catálogo platos
-                </mat-list-option>
-                </a>
-                <a class="nav-link" routerLink="/reserva">
-                  <mat-list-option>
-                    Hacer reserva
-                </mat-list-option>
-                </a>
-              </mat-selection-list>
+    <mat-selection-list #shoes [multiple]="false">
+      <a class="nav-link" routerLink="/plato">
+        <mat-list-option>
+          Catálogo platos
+        </mat-list-option>
+      </a>
+
+      <a class="nav-link" routerLink="/crear-plato">
+        <mat-list-option>
+          Crear platos
+        </mat-list-option>
+      </a>
+
+      <a class="nav-link" routerLink="/reserva">
+        <mat-list-option>
+          Hacer reserva
+        </mat-list-option>
+      </a>
+
+    </mat-selection-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -34,5 +37,3 @@
 <div class="example-footer">
   <app-footer></app-footer>
 </div>
-
-

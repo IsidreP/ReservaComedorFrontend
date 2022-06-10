@@ -1,13 +1,12 @@
-
-
-<form>
+ <div class="crearPlatoImg">
+<form [formGroup]="form">
   <div class="mb-3">
-    <input type="text" class="form-control" id="titulo" placeholder="Titulo del plato">
+    <input type="text" class="form-control" id="titulo" placeholder="Titulo del plato" formControlName="titulo">
   </div>
 
   <div class="input-group mb-3">
     <span class="input-group-text">€</span>
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Precio plato">
+    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Precio plato" formControlName="precio">
     <span class="input-group-text">.00</span>
   </div>
 
@@ -17,10 +16,17 @@
   </div>
 
   <div class="mb-3">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción del plato"></textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción del plato" formControlName="descripcion"></textarea>
   </div>
+ <div class="row">
+   <div class="col-4"></div>
+   <div class="col-4">
+    <button type="submit" class="btn btn-secondary">Guardar</button>
+   </div>
+   <div class="col-4"></div>
 
-  <button type="submit" class="btn btn-primary">Guardar</button>
+
+ </div>
 </form>
-
+</div>
 
