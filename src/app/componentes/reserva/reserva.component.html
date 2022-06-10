@@ -52,18 +52,19 @@
         <!-- PLATOS -->
         <mat-step [stepControl]="thirdFormGroup" label="Platos de la reserva">
           <form [formGroup]="thirdFormGroup">
-
+            <!-- form ensalada -->
             <div class="row">
               <div class="col-3">
                 <mat-form-field appearance="fill">
                   <mat-label>Elige ensalada</mat-label>
                   <mat-select formControlName="ensaladaPlato">
-                    <mat-option *ngFor="let ensalada of ensaladas" [value]="plato.value">
+                    <mat-option *ngFor="let ensalada of ensaladas" [value]="ensalada.value">
                       {{ensalada.value}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
+              <!-- form primero -->
               <div class="col-3">
                 <mat-form-field appearance="fill">
                   <mat-label>Elige primer plato</mat-label>
@@ -74,22 +75,24 @@
                   </mat-select>
                 </mat-form-field>
               </div>
+              <!-- form segundo -->
               <div class="col-3">
                 <mat-form-field appearance="fill">
                   <mat-label>Elige segundo plato</mat-label>
                   <mat-select formControlName="segundoPlato" >
-                    <mat-option *ngFor="let plato of platos" [value]="plato.value">
+                    <mat-option *ngFor="let plato of segundoPlato" [value]="plato.value">
                       {{plato.value}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
+              <!-- form postre -->
               <div class="col-3">
                 <mat-form-field appearance="fill">
                   <mat-label>Elige postre</mat-label>
                   <mat-select formControlName="postrePlato">
-                    <mat-option *ngFor="let plato of platos" [value]="plato.value">
-                      {{plato.value}}
+                    <mat-option *ngFor="let postre of postres" [value]="postre.value">
+                      {{postre.value}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>

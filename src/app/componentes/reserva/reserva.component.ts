@@ -27,7 +27,7 @@ export class ReservaComponent implements OnInit {
     {id: 9, value: '14:45 - 15:00'},
   ];
 
-  platos = [
+/*   platos = [
     {id: 1, value: 'Lentejas', categoria: 2},
     {id: 2, value: 'Arroz a la cubana', categoria: 2},
     {id: 3, value: 'Paella', categoria: 3},
@@ -36,12 +36,45 @@ export class ReservaComponent implements OnInit {
     {id: 6, value: 'Tarta de manzana',categoria: 4},
     {id: 7, value: 'Ensalada romana',categoria: 1},
     {id: 8, value: 'Ensalada de la casa',categoria: 1},
+  ] */
+
+  ensaladas = [
+    {id: 1, value: 'Ensalada de la huerta', categoria: 1},
+    {id: 2, value: 'Ensalada mixta', categoria: 1},
+    {id: 3, value: 'Ensalada mediterránea', categoria: 1},
+    {id: 4, value: 'Ensalada Chucrut', categoria: 1},
+    {id: 5, value: 'Ensalada de la casa', categoria: 1},
   ]
 
-  ensaladas = [];
-  primerPlato = [];
-  segundoPlato = [];
-  postres = [];
+  primerPlato = [
+    {id: 1, value: 'Potaje de garbanzos a la marinera', categoria: 2},
+    {id: 2, value: 'Arroz a la cubana', categoria: 2},
+    {id: 3, value: 'Crema de calabaza con virutas de ibérico', categoria: 2},
+    {id: 4, value: 'Canelones de pollo gratinados', categoria: 2},
+    {id: 5, value: 'Judías verdes con tomate y patatas', categoria: 2},
+  ];
+
+  segundoPlato = [
+    {id: 1, value: 'Dorada a la sal', categoria: 3},
+    {id: 2, value: 'Solomillo a la pimienta', categoria: 3},
+    {id: 3, value: 'Pechugas de pollo a la carbonara', categoria: 3},
+    {id: 4, value: 'Estofado de ternera a la cerveza', categoria: 3},
+    {id: 5, value: 'Albóndigas de ternera y championes', categoria: 3},
+
+  ];
+
+  postres = [
+    {id: 1, value: 'Tiramisú', categoria: 4},
+    {id: 2, value: 'Panna Cotta', categoria: 4},
+    {id: 3, value: 'Flan de huevo', categoria: 4},
+    {id: 4, value: 'Brownie', categoria: 4},
+    {id: 5, value: 'Crema de yogur con frutas', categoria: 4},
+  ];
+
+ /*  ensaladas = []; */
+/*   primerPlato = []; */
+/*   segundoPlato = []; */
+/*   postres = []; */
 
 
   firstFormGroup = this.fb.group({
