@@ -23,6 +23,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 @NgModule({
@@ -55,7 +57,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatNativeDateModule,
     MatListModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatCardModule
+
+
   ],
   providers: [
     MatDatepickerModule,

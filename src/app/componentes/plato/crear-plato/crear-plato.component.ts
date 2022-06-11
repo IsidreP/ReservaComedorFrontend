@@ -11,6 +11,8 @@ export class CrearPlatoComponent implements OnInit {
     titulo: ["", {validators: [Validators.required]}],
     precio: ["", {validators: [Validators.required]}],
     descripcion: ["", {validators: [Validators.required]}],
+    imagen: ["", {validators: [Validators.required]}],
+
   })
 
   constructor(
@@ -19,5 +21,35 @@ export class CrearPlatoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  entrar(){
+    alert("CREAR-PLATO CLICKADO")
+  }
+
+  /* function() {
+    var app = angular.module('myApp', ['ngMaterial']);
+    app.controller('AppCtrl', function($scope) {})
+    app.directive('chooseFile', function() {
+      return {
+        link: function (scope, elem, attrs) {
+          var button = elem.find('button');
+          var input = angular.element(elem[0].querySelector('input#fileInput'));
+          button.bind('click', function() {
+            input[0].click();
+          });
+          input.bind('change', function(e) {
+            scope.$apply(function() {
+              var files = e.target.files;
+              if (files[0]) {
+                scope.fileName = files[0].name;
+              } else {
+                scope.fileName = null;
+              }
+            });
+          });
+        }
+      };
+    });
+  }; */
 
 }
