@@ -1,19 +1,35 @@
 
 <mat-toolbar>
   <div class="header-style">
-    <span>Comedor App </span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <span class="app-style">Comedor App </span>
+    <button mat-icon-button  class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>restaurant</mat-icon>
     </button>
   </div>
   <span class="example-spacer"></span>
+
+  <mat-form-field class="search-style" floatLabel="never">
+    <input matInput placeholder="">
+  </mat-form-field>
+  <button type="button" style="width:70px;height:30px;" class="btn btn-secondary button-search">Buscar</button>
+
+ <!--  <input type="text" class="form-control maxWidthInput" placeholder="Buscar">
+  <button type="button" class="btn btn-secondary button-search">Buscar</button>
+  <span class="example-spacer"></span> -->
+
+
   <div class="user-area">
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button mat-icon-button matTooltip="Area personal" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>person</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Logout" class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>power_settings_new</mat-icon>
     </button>
   </div>
-</mat-toolbar>
+
+
+
 
 
 

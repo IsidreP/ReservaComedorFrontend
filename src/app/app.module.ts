@@ -24,6 +24,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -58,7 +59,8 @@ import {MatCardModule} from '@angular/material/card';
     MatListModule,
     MatSelectModule,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    MatTooltipModule
 
 
   ],

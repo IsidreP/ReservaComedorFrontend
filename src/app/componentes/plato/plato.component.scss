@@ -42,7 +42,8 @@ a {
   margin-right: 10px;
 /*   background-color: rgb(73, 65, 65); */
 /*   background-color: rgb(59, 53, 53); */
-  background-color: rgb(76, 69, 69);
+/*   background-color: rgb(76, 69, 69); */
+  opacity: 95%;
 
 }
 
@@ -69,13 +70,17 @@ button{
 }
 
 .bg-toolbar{
-  background-color: black;
-  color: goldenrod;
+  background-color: darkgrey;
 }
 
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.button-search{
+  margin-left: 5px;
+  size-adjust:initial ;
 }
 
 
