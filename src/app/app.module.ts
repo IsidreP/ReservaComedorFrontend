@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,8 +24,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
-
+import { ServiciosService } from './servicios/servicios.service';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -39,9 +39,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ReservaComponent,
     InicioComponent,
     CrearPlatoComponent,
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -60,11 +57,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSelectModule,
     FormsModule,
     MatCardModule,
-    MatTooltipModule
-
-
+    MatTooltipModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [
+    ServiciosService,
     MatDatepickerModule,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],

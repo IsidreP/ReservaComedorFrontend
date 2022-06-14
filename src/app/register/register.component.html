@@ -52,18 +52,21 @@
 
         <div class="row">
           <mat-form-field>
-            <input matInput type=password placeholder="Repite la contraseña" formControlName="password">
-
-            <mat-error *ngIf="form.get('password')?.hasError('required')">
+            <input matInput type=password placeholder="Repite la contraseña" formControlName="passwordRepetido">
+            <mat-error *ngIf="form.get('passwordRepetido')?.hasError('required')">
               Campo requerido
+            </mat-error>
+            <mat-error  *ngIf="form.get('passwordRepetido')?.hasError('notEqual')">
+              Passwords don't match!
             </mat-error>
           </mat-form-field>
         </div>
 
+
       </form>
     </div>
 
-    <div class="row">
+    <div class="row button-registrarse">
       <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
         (click)="entrar()">Registrarse</button>
     </div>

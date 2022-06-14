@@ -1,47 +1,12 @@
-<!--  <div class="crearPlatoImg">
-   <form [formGroup]="form">
-     <div class="mb-3">
-       <input type="text" class="form-control" id="titulo" placeholder="Titulo del plato" formControlName="titulo">
-     </div>
-
-     <div class="input-group mb-3">
-       <span class="input-group-text">€</span>
-       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Precio plato"
-         formControlName="precio">
-       <span class="input-group-text">.00</span>
-     </div>
-
-     <div class="mb-3">
-       <label for="formFile" class="form-label">Imagen del plato</label>
-       <input class="form-control" type="file" id="formFile">
-     </div>
-
-     <div class="mb-3">
-       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción del plato"
-         formControlName="descripcion"></textarea>
-     </div>
-     <div class="row">
-       <div class="col-4"></div>
-       <div class="col-4">
-         <button type="submit" class="btn btn-secondary">Guardar</button>
-       </div>
-       <div class="col-4"></div>
-     </div>
-   </form>
- </div> -->
-
-<!-- FORM DE TIPO REACTIVEFORMSMODULE -->
 <div class="crearPlatoImg">
-
   <div class="container loginContainer">
-
     <div class="row">
-      <span class="loginTitle">Formulario para crear nuevo plato</span>
+      <span class="loginTitle">Crea nuevo plato aquí</span>
     </div>
+
     <div class="row">
       <form [formGroup]="form">
-
-        <!-- título -->
+        <!-- input título -->
         <div class="row">
           <mat-form-field>
             <input matInput type="text" placeholder="Título" formControlName="titulo">
@@ -54,8 +19,7 @@
           </mat-form-field>
         </div>
 
-        <!-- precio  y imagen -->
-
+        <!-- input precio -->
         <mat-form-field floatLabel="always">
           <mat-label>Precio</mat-label>
           <input matInput type="number" class="example-right-align" placeholder="0" formControlName="precio">
@@ -66,66 +30,21 @@
           </mat-error>
         </mat-form-field>
 
-
-             <div class="row">
-            <mat-form-field>
-
-              <div class="myfilebrowser">
-                  <input matInput >
-                 <!--  <span matPrefix>Selecciona la imagen</span> -->
-                    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <!-- imagen -->
+        <div class="row">
+          <mat-form-field>
+       <!--      <mat-label>Selecciona la imagen</mat-label> -->
+              <input matInput>
+           <!-- <span matPrefix>Selecciona la imagen</span> -->
+               <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
                       <mat-icon>attach_file</mat-icon>
                     </button> -->
-                <input type="file" #UploadFileInput id="fileUpload" name="fileUpload"
-                  multiple="multiple" accept="image/*" />
-              </div>
-            </mat-form-field>
-          </div>
-
-<!-- ISIDRE -->
-         <!--   <div class="mb-3">
-            <label for="formFile" class="form-label">Selecciona la imagen del plato</label>
-            <input class="form-control" type="file" id="formFile">
-          </div> -->
-
-          <!-- SOLO ICONO -->
-      <!--   <div class="row">
-          <input type="file" class="file-input" #fileUpload>
-          <div class="file-upload">
-            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
-              <mat-icon>attach_file</mat-icon>
-            </button>
-          </div>
-        </div> -->
-
-
-
-        <!-- imagen -->
-
-
-
-
-
-
-        <!--   <div class="row">
-      <mat-form-field>
-        <div class="myfilebrowser">
-            <input matInput >
-            <div class="hint">Selecciona la imagen</div>
-            <span matPrefix>Selecciona la imagen</span>
-            <span matSuffix></span>
-              <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                <mat-icon>attach_file</mat-icon>
-              </button>
-          <input type="file" #UploadFileInput id="fileUpload" name="fileUpload"
-            multiple="multiple" accept="image/*" />
+              <input type="file" #UploadFileInput id="fileUpload" name="fileUpload" multiple="multiple"
+                accept="image/*" />
+          </mat-form-field>
         </div>
-    </mat-form-field>
-  </div> -->
 
-
-
-        <!-- descripción -->
+        <!--input descripción -->
         <div class="row">
           <mat-form-field>
             <mat-label>Descripción</mat-label>
@@ -135,16 +54,23 @@
             </mat-error>
           </mat-form-field>
         </div>
-
-
       </form>
     </div>
 
-    <!-- botón -->
+    <!-- botón crear nuevo plato -->
     <div class="d-grid button-crear">
       <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" (click)="entrar()">Crear nuevo
         plato</button>
     </div>
-
   </div>
 </div>
+
+    <!-- SOLO ICONO ROSA-->
+     <!--    <div class="row">
+          <input type="file" class="file-input" #fileUpload>
+          <div class="file-upload">
+            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          </div>
+        </div> -->

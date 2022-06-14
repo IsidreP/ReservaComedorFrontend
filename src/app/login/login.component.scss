@@ -2,9 +2,11 @@
   letter-spacing: 1px;
   font-family: system-ui;
   text-align: center;
+  font-weight: lighter;
 
   a {
     text-decoration: none;
+    color: white;
   }
 }
 
@@ -29,4 +31,13 @@
   background-repeat: no-repeat;
   object-fit: contain;
   background-image: url(../../assets/img/login.jpg);
+}
+
+.backgroundSnackbar {
+  background-color: blue;
+}
+
+.button-acceder{
+padding-left: 100px;
+padding-right: 100px;
 }
