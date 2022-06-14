@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  entrar() {
+  entrarClicked() {
     this.login$ = this.servicio.login(
       this.form.controls['email'].value,
       this.form.controls['password'].value
@@ -34,7 +34,21 @@ export class LoginComponent implements OnInit {
 
     this.login$.subscribe(
       (respuesta) => {
-        console.log('La respuesta es: ', respuesta);
+        console.log('respuesta exitosa: ', respuesta);
+
+        this.servicio.setearSesion(respuesta);
+
+        this.snackBar.open(
+          '¡Usted se ha logueado con éxito!',
+          'Cerrar',
+          {
+            duration: 4000,
+            verticalPosition: 'top',
+          }
+        );
+
+        // redireccionamos a la página del plato
+        this.router.navigate(['/plato']);
       },
       (error) => {
         console.log('El error es: ', error);
@@ -49,8 +63,6 @@ export class LoginComponent implements OnInit {
         );
       }
     );
-
-    // redireccionamos a la página del plato
-/*     this.router.navigate(['/plato']); */
   }
+
 }

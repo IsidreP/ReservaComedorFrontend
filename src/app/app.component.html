@@ -4,7 +4,7 @@
   <mat-sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="false" [fixedTopGap]="0"
     [fixedBottomGap]="0">
 
-    <mat-selection-list #shoes [multiple]="false">
+    <mat-selection-list [multiple]="false">
 
       <a class="nav-link" routerLink="/plato">
         <mat-list-option>
@@ -12,17 +12,19 @@
         </mat-list-option>
       </a>
 
-      <a class="nav-link" routerLink="/crear-plato">
-        <mat-list-option>
-          Crear platos
-        </mat-list-option>
-      </a>
+      <ng-container *ngIf="usuarioLogeado$ | async as usuario">
+        <a class="nav-link" routerLink="/crear-plato">
+          <mat-list-option>
+            Crear platos
+          </mat-list-option>
+        </a>
 
-      <a class="nav-link" routerLink="/reserva">
-        <mat-list-option>
-          Hacer reserva
-        </mat-list-option>
-      </a>
+        <a class="nav-link" routerLink="/reserva">
+          <mat-list-option>
+            Hacer reserva
+          </mat-list-option>
+        </a>
+      </ng-container>
 
     </mat-selection-list>
   </mat-sidenav>

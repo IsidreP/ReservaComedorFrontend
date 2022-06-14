@@ -22,21 +22,36 @@
       aria-label="Example icon-button with heart icon">
       <mat-icon>person</mat-icon>
     </button> -->
-<!--     <button (click)="loginClicked()" mat-icon-button matTooltip="Login">
-      <mat-icon color="">login</mat-icon>
-    </button> -->
 
-    <button mat-icon-button matTooltip="Area personal">
-      <mat-icon>person</mat-icon>
-   </button>
+
+
+      <div *ngIf="usuarioLogeado$ | async as usuario; else botonLogin">
+        El nombre del usuario es: {{usuario[0].email}}
+
+        <button mat-icon-button matTooltip="Area personal">
+          <mat-icon>person</mat-icon>
+       </button>
+
+        <button (click)="logoutClicked()" mat-icon-button matTooltip="Logout" >
+          <mat-icon color="warn">power_settings_new</mat-icon>
+        </button>
+
+      </div>
+
+      <ng-template #botonLogin>
+        <button routerLink="/login" mat-icon-button matTooltip="Login">
+          <mat-icon color="">login</mat-icon>
+        </button>
+      </ng-template>
+
+
+
 <!--
    <button mat-icon-button [disabled]="payloadArray.enabled != 'true' " color="primary" >
     <mat-icon color="warn" style="cursor: pointer;" >delete</mat-icon>
  </button> -->
 
-    <button (click)="logoutClicked()" mat-icon-button matTooltip="Logout" >
-      <mat-icon color="warn">power_settings_new</mat-icon>
-    </button>
+
 
 
   </div>

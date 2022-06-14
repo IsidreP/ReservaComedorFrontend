@@ -25,10 +25,10 @@ export const equivalentValidator = (
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  [x: string]: any;
+/*   [x: string]: any; */
   registro$: Observable<any>;
-
   rol: Object;
+
   form: FormGroup = this.fb.group(
     {
       nombre: ['', { validators: [Validators.required] }],
@@ -57,23 +57,22 @@ export class RegisterComponent implements OnInit {
       this.form.controls['nombre'].value,
       this.form.controls['email'].value,
       this.form.controls['password'].value,
-      this.form.controls['passwordRepetido'].value,
-      // asignamos rol de invitado a todos los usuarios
-       (this.rol = {
-        idRol: 3,
-        nombreRol: 'administrador',
+      (this.rol = {
+        idRol: 2,
+        nombreRol: 'autorizado',
       })
     );
 
     this.registro$.subscribe(
       (respuesta) => {
         console.log('La respuesta es: ', respuesta);
+        // redireccionamos a la página del login
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.log('El error es: ', error);
       }
     );
-    // redireccionamos a la página del login
-    this.router.navigate(['/login']);
+
   }
 }

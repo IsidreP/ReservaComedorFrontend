@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -8,32 +9,59 @@ import { Observable, tap } from 'rxjs';
 export class ServiciosService {
 
   url:string = 'https://comedor-api.herokuapp.com';
+  token:string;
+  decodedToken: any;
+  usuarioLogeado$ = new BehaviorSubject<any>('');
 
-  token:string = localStorage.getItem('token');
-
-  options = {
-    headers: {
-      'Authorization': `Bearer ${this.token}`
-    }
-  };
+  options: any;
 
   constructor(private http: HttpClient) { }
 
+  getDecodedAccessToken(): any {
+    try {
+      this.decodedToken = jwt_decode(this.token);
+
+      this.obtenerUsuarios().subscribe(
+        (respuesta) => {
+          this.filtrarUsuarios(respuesta)
+        }
+      )
+    } catch(error) {
+      console.log('error from getDecodedAccessToken', error);
+    }
+  }
+
   setearSesion(respuestaServidor: any){
     localStorage.setItem('token', respuestaServidor.token);
+
+    this.token = respuestaServidor.token;
+
+    this.options  = {
+      headers: {
+        'Authorization': `Bearer ${this.token}`
+      }
+    };
+
+    this.getDecodedAccessToken();
+  }
+
+  filtrarUsuarios(usuarios: any){
+    return this.usuarioLogeado$.next(usuarios.filter(usuario => usuario.username == this.decodedToken.sub));
   }
 
   logout() {
     localStorage.removeItem("token");
+    this.usuarioLogeado$.next('');
+    this.token = undefined;
+    this.options = undefined;
   }
 
   // servicio que registra al usuario
-  registro(nombreApellido: string, email: string, password: string, passwordRepetido: string, rol: Object): Observable<any>{
+  registro(nombreApellido: string, email: string, password: string,  rol: Object): Observable<any>{
     let body = {
-      nombreApellido: nombreApellido,
-      email: email,
+      username: email,
+      email: nombreApellido,
       password: password,
-      passwordRepetido: passwordRepetido,
       rol: rol
     }
     return this.http.post(`${this.url}/registro`, body)
@@ -47,22 +75,17 @@ export class ServiciosService {
       password: password
     }
 
-    return this.http.post(`${this.url}/login`, body).pipe(
-      tap(
-        respuesta => {
-          this.setearSesion(respuesta)
-        }
-      )
-    );
+    return this.http.post(`${this.url}/login`, body);
   }
 
 
   obtenerPlatos(){
-    let options = {
-      headers: {
-        'Authorization': `Bearer ${this.token}`
-      }
-    }
     return this.http.get(`${this.url}/api/platos`, this.options)
   }
+
+  obtenerUsuarios(){
+    return this.http.get(`${this.url}/api/usuarios`, this.options)
+  }
+
+
 }
