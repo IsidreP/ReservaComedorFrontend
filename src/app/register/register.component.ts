@@ -68,6 +68,15 @@ export class RegisterComponent implements OnInit {
         console.log('La respuesta es: ', respuesta);
         // redireccionamos a la página del login
         this.router.navigate(['/login']);
+
+        this.snackBar.open(
+          '¡Usted se ha registrado con éxito!',
+          'Cerrar',
+          {
+            duration: 5000,
+            verticalPosition: 'top',
+          }
+        );
       },
       (error) => {
         console.log('El error es: ', error);

@@ -10,6 +10,9 @@ import { ServiciosService } from '../servicios/servicios.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+
+  usuarioLogeado$: Observable<any>; // spinner
+
   login$: Observable<any>;
 
   form: FormGroup = this.fb.group({
@@ -24,7 +27,9 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.usuarioLogeado$ = this.servicio.usuarioLogeado$; // spinner
+  }
 
   entrarClicked() {
     this.login$ = this.servicio.login(
@@ -38,11 +43,12 @@ export class LoginComponent implements OnInit {
 
         this.servicio.setearSesion(respuesta);
 
+
         this.snackBar.open(
           '¡Usted se ha logueado con éxito!',
           'Cerrar',
           {
-            duration: 4000,
+            duration: 5000,
             verticalPosition: 'top',
           }
         );

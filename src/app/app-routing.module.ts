@@ -7,8 +7,9 @@ import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+
 const routes: Routes = [
-  {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'inicio', component: InicioComponent },
   {path: 'plato', component: PlatoComponent },
   {path: 'crear-plato', component: CrearPlatoComponent },
