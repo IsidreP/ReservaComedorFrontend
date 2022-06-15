@@ -42,4 +42,8 @@
       <span class="loginTitle "><a routerLink="/registro">Crear una cuenta</a></span>
     </div>
   </div>
+
+  <!-- SPINNER -->
+<mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+
 </div>

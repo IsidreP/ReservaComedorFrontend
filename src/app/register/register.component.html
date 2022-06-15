@@ -75,4 +75,9 @@
       <span class="loginTitle"><a routerLink="/login">Login</a></span>
     </div>
   </div>
+
+
+  <!-- SPINNER -->
+<mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+
 </div>

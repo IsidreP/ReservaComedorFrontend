@@ -33,11 +33,24 @@
   background-image: url(../../assets/img/login.jpg);
 }
 
-.backgroundSnackbar {
+/* NO FUNCIONA -> BUSCAR  */
+/* .backgroundSnackbar {
   background-color: blue;
-}
+} */
 
 .button-acceder{
 padding-left: 100px;
 padding-right: 100px;
 }
+
+/* SPINNER */
+mat-progress-spinner{
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+

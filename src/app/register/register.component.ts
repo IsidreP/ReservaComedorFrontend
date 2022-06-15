@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { ServiciosService } from '../servicios/servicios.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SpinnerService } from '../servicios/spinner.service';
 
 // para validar si la contraseña y contraseña repetida coinciden
 export const equivalentValidator = (
@@ -25,9 +26,12 @@ export const equivalentValidator = (
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-/*   [x: string]: any; */
+  /*   [x: string]: any; */
   registro$: Observable<any>;
   rol: Object;
+
+  /* SPINNER */
+  loading$ = this.loader.loading$;
 
   form: FormGroup = this.fb.group(
     {
@@ -46,13 +50,17 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private servicio: ServiciosService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+
+    /* SPINNER */
+    public loader: SpinnerService
   ) {}
 
   ngOnInit(): void {}
 
   entrar() {
-    console.log('REGISTRARSE CLICKADO!');
+    /* SPINNER */
+    this.loader.show();
     this.registro$ = this.servicio.registro(
       this.form.controls['nombre'].value,
       this.form.controls['email'].value,
@@ -65,23 +73,20 @@ export class RegisterComponent implements OnInit {
 
     this.registro$.subscribe(
       (respuesta) => {
+        /* SPINNER */
+        this.loader.hide();
         console.log('La respuesta es: ', respuesta);
         // redireccionamos a la página del login
         this.router.navigate(['/login']);
 
-        this.snackBar.open(
-          '¡Usted se ha registrado con éxito!',
-          'Cerrar',
-          {
-            duration: 5000,
-            verticalPosition: 'top',
-          }
-        );
+        this.snackBar.open('¡Usted se ha registrado con éxito!', 'Cerrar', {
+          duration: 5000,
+          verticalPosition: 'top',
+        });
       },
       (error) => {
         console.log('El error es: ', error);
       }
     );
-
   }
 }

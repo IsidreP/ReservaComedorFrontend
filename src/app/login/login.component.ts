@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ServiciosService } from '../servicios/servicios.service';
+import { SpinnerService } from '../servicios/spinner.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,9 +12,10 @@ import { ServiciosService } from '../servicios/servicios.service';
 })
 export class LoginComponent implements OnInit {
 
-  usuarioLogeado$: Observable<any>; // spinner
-
   login$: Observable<any>;
+
+  /* SPINNER */
+  loading$ = this.loader.loading$;
 
   form: FormGroup = this.fb.group({
     email: ['', { validators: [Validators.required, Validators.email] }],
@@ -24,14 +26,21 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private servicio: ServiciosService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+
+    /* SPINNER */
+    public loader: SpinnerService
+
   ) {}
 
   ngOnInit(): void {
-    this.usuarioLogeado$ = this.servicio.usuarioLogeado$; // spinner
+
   }
 
   entrarClicked() {
+    /* SPINNER */
+    this.loader.show();
+
     this.login$ = this.servicio.login(
       this.form.controls['email'].value,
       this.form.controls['password'].value
@@ -39,6 +48,7 @@ export class LoginComponent implements OnInit {
 
     this.login$.subscribe(
       (respuesta) => {
+        this.loader.hide();
         console.log('respuesta exitosa: ', respuesta);
 
         this.servicio.setearSesion(respuesta);
@@ -57,6 +67,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/plato']);
       },
       (error) => {
+        this.loader.hide();
         console.log('El error es: ', error);
         // mostramos snackBar en el caso de credenciales invalidas
         this.snackBar.open(
