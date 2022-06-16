@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   /* SPINNER */
   loading$ = this.loader.loading$;
+  /* color: ThemePalette = 'accent'; */
 
   form: FormGroup = this.fb.group({
     email: ['', { validators: [Validators.required, Validators.email] }],

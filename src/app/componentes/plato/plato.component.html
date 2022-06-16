@@ -1,21 +1,66 @@
 <div class="main-component row">
-
-  <!-- BUSQUEDA  -->
-  <!-- <div class="row">
-    <div class="col-3"></div>
-    <div class="col-3"></div>
-    <div class="col-3"></div>
-    <div class="col-3">
-      <mat-form-field class="search-style" floatLabel="never">
-        <input matInput class="maxWidthInput" placeholder="">
-      </mat-form-field>
-      <button type="button" style="width:70px;height:30px;" class="btn btn-secondary button-search">Buscar</button>
+<!-- DIV PLATOS  -->
+  <div class="col-10">
+    <!--   <div class="col-4" *ngFor="let plato of platos; index as i"> -->
+    <div class="row">
+      <mat-card class="example-card">
+        <mat-card-header class="bg-card">
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{platos?.nombre}}</mat-card-title>
+          <mat-card-subtitle>{{platos?.precio}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src={{platos.imagen}}>
+        <mat-card-content class="bg-card">
+          <p>
+            {{platos.desscripcion}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="buttons-center">
+          <button mat-button>MODIFICAR</button>
+          <button mat-button>ELIMINAR</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
-  </div> -->
+  </div>
+
+   <!-- DIV CATEGORÍAS  -->
+   <div class="col-2 div-categorias">
+    <mat-selection-list #categorias [multiple]="false">
+      <a class="nav-link categorias" routerLink="/plato">
+        <mat-list-option>
+          ENSALADAS
+        </mat-list-option>
+      </a>
+      <a class="nav-link categorias" routerLink="/plato">
+        <mat-list-option>
+          PRIMEROS
+        </mat-list-option>
+      </a>
+      <a class="nav-link categorias" routerLink="/plato">
+        <mat-list-option>
+          SEGUNDOS
+        </mat-list-option>
+      </a>
+      <a class="nav-link categorias" routerLink="/plato">
+        <mat-list-option>
+          POSTRES
+        </mat-list-option>
+      </a>
+    </mat-selection-list>
+  </div>
+
+</div>
+
+
+
+
+
+
+
 
   <!-- DIV PLATOS -->
-  <div class="col-10">
-    <div class="row">
+  <!--   <div class="col-10"> -->
+  <!-- <div class="row">
 
       <div class="col-4">
         <mat-card class="example-card">
@@ -144,31 +189,5 @@
 
     </div>
   </div>
+ -->
 
-  <!-- DIV CATEGORÍAS  -->
-  <div class="col-2 div-categorias">
-    <mat-selection-list #categorias [multiple]="false">
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          ENSALADAS
-        </mat-list-option>
-      </a>
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          PRIMEROS
-        </mat-list-option>
-      </a>
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          SEGUNDOS
-        </mat-list-option>
-      </a>
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          POSTRES
-        </mat-list-option>
-      </a>
-    </mat-selection-list>
-  </div>
-
-</div>
