@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         );
 
         // redireccionamos a la página del plato
-        this.router.navigate(['/plato']);
+        this.router.navigate(['/platos']);
       },
       (error) => {
         this.loader.hide();

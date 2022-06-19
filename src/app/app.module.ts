@@ -28,6 +28,9 @@ import { ServiciosService } from './servicios/servicios.service';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ModificarPlatoComponent } from './componentes/plato/modificar-plato/modificar-plato.component';
 
 
 @NgModule({
@@ -41,6 +44,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReservaComponent,
     InicioComponent,
     CrearPlatoComponent,
+    ModificarPlatoComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTooltipModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [
     ServiciosService,

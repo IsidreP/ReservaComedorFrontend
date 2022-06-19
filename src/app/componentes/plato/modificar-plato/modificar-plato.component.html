@@ -29,9 +29,9 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- input imagen -->
+        <!-- imagen -->
         <div class="row">
-          <button mat-raised-button (click)="fileInput.click()">Selecciona el archivo</button>
+          <button type="button" mat-raised-button (click)="fileInput.click()">Selecciona el archivo</button>
         </div>
 
         <!--input descripción -->
@@ -50,7 +50,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Categoria del plato</mat-label>
             <mat-select formControlName="categoria" name="categoria">
-              <mat-option *ngFor="let categoria of categorias; let i = index" [value]="categorias[i]"> <!-- objeto de array de categorías -->
+              <mat-option *ngFor="let categoria of categorias; let i = index" [value]="categorias[i]">
                 {{categoria.nombreCategoria | uppercase}}
               </mat-option>
             </mat-select>
@@ -64,11 +64,10 @@
 
     <!-- botón crear nuevo plato -->
     <div class="d-grid button-crear">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" (click)="crearPlato()">Crear
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" (click)="modificarPlato()">Modificar
         plato</button>
     </div>
   </div>
 </div>
 
-<!-- invocado al clickar "Selecciona el archivo"  -->
 <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">

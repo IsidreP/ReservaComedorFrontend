@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import jwt_decode from 'jwt-decode';
@@ -38,7 +38,7 @@ export class ServiciosService {
 
     this.options  = {
       headers: {
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `Bearer ${this.token}`,
       }
     };
 
@@ -64,6 +64,7 @@ export class ServiciosService {
       password: password,
       rol: rol
     }
+
     return this.http.post(`${this.url}/registro`, body)
   }
 
@@ -80,11 +81,33 @@ export class ServiciosService {
 
 
   obtenerPlatos(){
+
+    const httpOptions = {
+      headers: new HttpHeaders()
+    };
+
+
     return this.http.get(`${this.url}/api/platos`, this.options)
   }
 
   obtenerUsuarios(){
     return this.http.get(`${this.url}/api/usuarios`, this.options)
+  }
+
+  crearPlato(body: any){
+    return this.http.post(`${this.url}/api/platos`, body, this.options);
+  }
+
+  eliminarPlato(id: number){
+    return this.http.delete(`${this.url}/api/platos/${id}`, this.options);
+  }
+
+  modificarPlato(body: any, id: number){
+    return this.http.put(`${this.url}/api/platos/${id}`, body, this.options);
+  }
+
+  obtenerPlato(id: number){
+    return this.http.get(`${this.url}/api/platos/${id}`, this.options);
   }
 
 

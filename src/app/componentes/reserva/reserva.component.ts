@@ -71,11 +71,6 @@ export class ReservaComponent implements OnInit {
     {id: 5, value: 'Crema de yogur con frutas', categoria: 4},
   ];
 
- /*  ensaladas = []; */
-/*   primerPlato = []; */
-/*   segundoPlato = []; */
-/*   postres = []; */
-
 
   firstFormGroup = this.fb.group({
     fechaReserva: ['', Validators.required],
@@ -102,6 +97,7 @@ export class ReservaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.firstFormGroup);
   }
 
 }

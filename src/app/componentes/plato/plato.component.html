@@ -1,193 +1,148 @@
 <div class="main-component row">
-<!-- DIV PLATOS  -->
-  <div class="col-10">
-    <!--   <div class="col-4" *ngFor="let plato of platos; index as i"> -->
-    <div class="row">
-      <mat-card class="example-card">
-        <mat-card-header class="bg-card">
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{platos?.nombre}}</mat-card-title>
-          <mat-card-subtitle>{{platos?.precio}}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src={{platos.imagen}}>
-        <mat-card-content class="bg-card">
-          <p>
-            {{platos.desscripcion}}
-          </p>
-        </mat-card-content>
-        <mat-card-actions class="buttons-center">
-          <button mat-button>MODIFICAR</button>
-          <button mat-button>ELIMINAR</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
 
-   <!-- DIV CATEGORÍAS  -->
-   <div class="col-2 div-categorias">
-    <mat-selection-list #categorias [multiple]="false">
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          ENSALADAS
-        </mat-list-option>
-      </a>
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          PRIMEROS
-        </mat-list-option>
-      </a>
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          SEGUNDOS
-        </mat-list-option>
-      </a>
-      <a class="nav-link categorias" routerLink="/plato">
-        <mat-list-option>
-          POSTRES
-        </mat-list-option>
-      </a>
-    </mat-selection-list>
-  </div>
+    <div class="row">
+
+      <mat-tab-group mat-align-tabs="start">
+
+        <mat-tab label="TODOS">
+            <div class="row" *ngIf="todosPlatos$ | async as platos ">
+              <div class="col-4" *ngFor="let plato of platos">
+
+                  <mat-card class="example-card">
+                    <mat-card-header class="bg-card">
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                      <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                    <mat-card-content class="bg-card">
+                      <p>
+                        {{plato?.descripcionPlato}}
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions class="buttons-center">
+                      <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                      <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                    </mat-card-actions>
+                  </mat-card>
+              </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="ENTRANTES">
+
+            <div class="row" *ngIf="entrantes$ | async as platos ">
+
+              <div class="col-4" *ngFor="let plato of platos">
+
+                  <mat-card class="example-card">
+                    <mat-card-header class="bg-card">
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                      <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                    <mat-card-content class="bg-card">
+                      <p>
+                        {{plato?.descripcionPlato}}
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions class="buttons-center">
+                      <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                      <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                    </mat-card-actions>
+                  </mat-card>
+
+              </div>
+
+            </div>
+        </mat-tab>
+
+        <mat-tab label="PRIMEROS">
+          <div class="row" *ngIf="primeros$ | async as platos ">
+            <div class="col-4" *ngFor="let plato of platos">
+
+                <mat-card class="example-card">
+                  <mat-card-header class="bg-card">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                    <mat-card-subtitle>{{plato?.precioPlato + '€'}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                  <mat-card-content class="bg-card">
+                    <p>
+                      {{plato?.descripcionPlato}}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions class="buttons-center">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                  </mat-card-actions>
+                </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="SEGUNDOS">
+          <div class="row" *ngIf="segundos$ | async as platos ">
+            <div class="col-4" *ngFor="let plato of platos">
+
+                <mat-card class="example-card">
+                  <mat-card-header class="bg-card">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                    <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR' }}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                  <mat-card-content class="bg-card">
+                    <p>
+                      {{plato?.descripcionPlato}}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions class="buttons-center">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                  </mat-card-actions>
+                </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="POSTRES">
+          <div class="row" *ngIf="postres$ | async as platos ">
+            <div class="col-4" *ngFor="let plato of platos">
+
+                <mat-card class="example-card">
+                  <mat-card-header class="bg-card">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                    <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                  <mat-card-content class="bg-card">
+                    <p>
+                      {{plato?.descripcionPlato}}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions class="buttons-center">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                  </mat-card-actions>
+                </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+
+    </div>
 
 </div>
 
+  <!-- SPINNER -->
+  <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
+
+  </mat-progress-spinner>
 
 
-
-
-
-
-
-  <!-- DIV PLATOS -->
-  <!--   <div class="col-10"> -->
-  <!-- <div class="row">
-
-      <div class="col-4">
-        <mat-card class="example-card">
-          <mat-card-header class="bg-card">
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Borsch</mat-card-title>
-            <mat-card-subtitle>6.00€</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="../../../assets/img/borsch2.JPG">
-          <mat-card-content class="bg-card">
-            <p >
-              La sabrosa y aromática sopa de remolacha llamada borsch.
-            </p>
-          </mat-card-content>
-          <mat-card-actions class="buttons-center">
-            <button mat-button>MODIFICAR</button>
-            <button mat-button>ELIMINAR</button>
-          </mat-card-actions>
-        </mat-card>
-
-      </div>
-
-      <div class="col-4">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Varenyky</mat-card-title>
-            <mat-card-subtitle>6.00€</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="../../../assets/img/varenyki2.JPG">
-          <mat-card-content>
-            <p>
-              "Media lunas" rellenas de puré de patata, setas y requesón.
-            </p>
-          </mat-card-content>
-          <mat-card-actions class="buttons-center">
-            <button mat-button>MODIFICAR</button>
-            <button mat-button>ELIMINAR</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-      <div class="col-4">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Goulash</mat-card-title>
-            <mat-card-subtitle>6.00€</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="../../../assets/img/goulash1.JPG">
-          <mat-card-content>
-            <p>
-              Sopa de carne de buey con cebollas y páprica. Lorem ipsum dolor sit amet.
-            </p>
-          </mat-card-content>
-          <mat-card-actions class="buttons-center">
-            <button mat-button>MODIFICAR</button>
-            <button mat-button>ELIMINAR</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-    </div>
-
-    <div class="row">
-
-      <div class="col-4">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Borsch</mat-card-title>
-            <mat-card-subtitle>6.00€</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="../../../assets/img/borsch2.JPG">
-          <mat-card-content>
-            <p>
-              La sabrosa y aromática sopa de remolacha llamada borsch.
-            </p>
-          </mat-card-content>
-          <mat-card-actions class="buttons-center">
-            <button mat-button>MODIFICAR</button>
-            <button mat-button>ELIMINAR</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-      <div class="col-4">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Varenyky</mat-card-title>
-            <mat-card-subtitle>6.00€</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="../../../assets/img/varenyki2.JPG">
-          <mat-card-content>
-            <p>
-              "Media lunas" rellenas de puré de patata, setas y requesón.
-            </p>
-          </mat-card-content>
-          <mat-card-actions class="buttons-center">
-            <button mat-button>MODIFICAR</button>
-            <button mat-button>ELIMINAR</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-      <div class="col-4">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Goulash</mat-card-title>
-            <mat-card-subtitle>6.00€</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="../../../assets/img/goulash1.JPG">
-          <mat-card-content>
-            <p>
-              Sopa de carne de buey con cebollas y páprica. Lorem ipsum dolor sit amet.
-            </p>
-          </mat-card-content>
-          <mat-card-actions class="buttons-center">
-            <button mat-button>MODIFICAR</button>
-            <button mat-button>ELIMINAR</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-    </div>
-  </div>
- -->
 
