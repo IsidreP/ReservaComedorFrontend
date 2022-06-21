@@ -31,6 +31,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ModificarPlatoComponent } from './componentes/plato/modificar-plato/modificar-plato.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { ModificarPlatoComponent } from './componentes/plato/modificar-plato/mod
     InicioComponent,
     CrearPlatoComponent,
     ModificarPlatoComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

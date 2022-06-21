@@ -2,11 +2,22 @@
 
     <div class="row">
 
+    <!-- BUSQUEDA  -->
+    <div id="busqueda" class="row">
+      <div class="col-1">
+        <mat-form-field class="search-style" floatLabel="never">
+          <input matInput class="maxWidthInput" name="filterPlato" placeholder="Buscar ..." [(ngModel)]="filterPlato">
+        </mat-form-field>
+      </div>
+    </div>
+
       <mat-tab-group mat-align-tabs="start">
+
+
 
         <mat-tab label="TODOS">
             <div class="row" *ngIf="todosPlatos$ | async as platos ">
-              <div class="col-4" *ngFor="let plato of platos">
+              <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
 
                   <mat-card class="example-card">
                     <mat-card-header class="bg-card">
@@ -29,11 +40,13 @@
             </div>
         </mat-tab>
 
+
+
         <mat-tab label="ENTRANTES">
 
             <div class="row" *ngIf="entrantes$ | async as platos ">
 
-              <div class="col-4" *ngFor="let plato of platos">
+              <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
 
                   <mat-card class="example-card">
                     <mat-card-header class="bg-card">
@@ -60,7 +73,7 @@
 
         <mat-tab label="PRIMEROS">
           <div class="row" *ngIf="primeros$ | async as platos ">
-            <div class="col-4" *ngFor="let plato of platos">
+            <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
 
                 <mat-card class="example-card">
                   <mat-card-header class="bg-card">
@@ -85,7 +98,7 @@
 
         <mat-tab label="SEGUNDOS">
           <div class="row" *ngIf="segundos$ | async as platos ">
-            <div class="col-4" *ngFor="let plato of platos">
+            <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
 
                 <mat-card class="example-card">
                   <mat-card-header class="bg-card">
@@ -110,7 +123,7 @@
 
         <mat-tab label="POSTRES">
           <div class="row" *ngIf="postres$ | async as platos ">
-            <div class="col-4" *ngFor="let plato of platos">
+            <div class="col-4" *ngFor="let plato of platos  | filter:filterPlato">
 
                 <mat-card class="example-card">
                   <mat-card-header class="bg-card">
@@ -132,7 +145,6 @@
             </div>
           </div>
         </mat-tab>
-
       </mat-tab-group>
 
     </div>

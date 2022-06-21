@@ -26,6 +26,8 @@ export class PlatoComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
+  filterPlato = '';
+
   ngOnInit(): void {
     this.todosPlatos$ = this.servicio.obtenerPlatos().pipe(shareReplay());
 
