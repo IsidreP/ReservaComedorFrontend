@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, shareReplay, tap } from 'rxjs';
 import { ServiciosService } from 'src/app/servicios/servicios.service';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
+import { MatDialogComponent } from '../mat-dialog/mat-dialog.component';
 @Component({
   selector: 'app-plato',
   templateUrl: './plato.component.html',
@@ -18,15 +20,21 @@ export class PlatoComponent implements OnInit {
 
   loading$ = this.loader.loading$;
 
+  usuarioLogeado$: Observable<any>;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private servicio: ServiciosService,
     private loader: SpinnerService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+
+    this.usuarioLogeado$ = this.servicio.usuarioLogeado$;
+
     this.todosPlatos$ = this.servicio.obtenerPlatos().pipe(shareReplay());
 
     this.entrantes$ = this.todosPlatos$.pipe(
@@ -98,4 +106,21 @@ export class PlatoComponent implements OnInit {
       });
     });
   }
+
+  openDialog(idPlato: any): void {
+   const dialogRef = this.dialog.open(MatDialogComponent, {
+      width: '400px',
+      data: {idPlato: idPlato},
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      if (result != undefined){
+        this.eliminarPlato(result.idPlato);
+      }
+    });
+  }
+
+
 }

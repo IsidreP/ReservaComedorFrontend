@@ -27,17 +27,6 @@ export class ReservaComponent implements OnInit {
     {id: 9, value: '14:45 - 15:00'},
   ];
 
-/*   platos = [
-    {id: 1, value: 'Lentejas', categoria: 2},
-    {id: 2, value: 'Arroz a la cubana', categoria: 2},
-    {id: 3, value: 'Paella', categoria: 3},
-    {id: 4, value: 'Gazpacho',categoria: 3},
-    {id: 5, value: 'Tiramisú',categoria: 4},
-    {id: 6, value: 'Tarta de manzana',categoria: 4},
-    {id: 7, value: 'Ensalada romana',categoria: 1},
-    {id: 8, value: 'Ensalada de la casa',categoria: 1},
-  ] */
-
   ensaladas = [
     {id: 1, value: 'Ensalada de la huerta', categoria: 1},
     {id: 2, value: 'Ensalada mixta', categoria: 1},

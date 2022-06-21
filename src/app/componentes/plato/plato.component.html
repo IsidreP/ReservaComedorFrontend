@@ -1,148 +1,198 @@
-<div class="main-component row">
+<div class="main-component row cdkscrollable">
 
-    <div class="row">
+  <div class="row">
 
-      <mat-tab-group mat-align-tabs="start">
+    <mat-tab-group dynamicHeight class="mat-tab-body-content" mat-align-tabs="start">
 
-        <mat-tab label="TODOS">
-            <div class="row" *ngIf="todosPlatos$ | async as platos ">
-              <div class="col-4" *ngFor="let plato of platos">
+      <mat-tab  label="TODOS">
+        <div class="row mat-tab-body-content" *ngIf="todosPlatos$ | async as platos ">
+          <div class="col-4" *ngFor="let plato of platos">
 
-                  <mat-card class="example-card">
-                    <mat-card-header class="bg-card">
-                      <div mat-card-avatar class="example-header-image"></div>
-                      <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                      <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
-                    <mat-card-content class="bg-card">
-                      <p>
-                        {{plato?.descripcionPlato}}
-                      </p>
-                    </mat-card-content>
-                    <mat-card-actions class="buttons-center">
-                      <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
-                      <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
-                    </mat-card-actions>
-                  </mat-card>
-              </div>
-            </div>
-        </mat-tab>
+            <mat-card class="example-card">
+              <mat-card-header class="bg-card">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
+              <mat-card-content class="bg-card">
+                <p>
+                  {{plato?.descripcionPlato}}
+                </p>
+              </mat-card-content>
 
-        <mat-tab label="ENTRANTES">
+              <mat-card-actions  class="buttons-center" >
 
-            <div class="row" *ngIf="entrantes$ | async as platos ">
+                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
+                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                  <!--  <mat-icon> border_color</mat-icon> -->
+                  <mat-icon>edit</mat-icon>
+                </button>
 
-              <div class="col-4" *ngFor="let plato of platos">
+                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                  <mat-icon color="">delete</mat-icon>
+                </button>
+              </ng-container>
 
-                  <mat-card class="example-card">
-                    <mat-card-header class="bg-card">
-                      <div mat-card-avatar class="example-header-image"></div>
-                      <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                      <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
-                    <mat-card-content class="bg-card">
-                      <p>
-                        {{plato?.descripcionPlato}}
-                      </p>
-                    </mat-card-content>
-                    <mat-card-actions class="buttons-center">
-                      <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
-                      <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
-                    </mat-card-actions>
-                  </mat-card>
-
-              </div>
-
-            </div>
-        </mat-tab>
-
-        <mat-tab label="PRIMEROS">
-          <div class="row" *ngIf="primeros$ | async as platos ">
-            <div class="col-4" *ngFor="let plato of platos">
-
-                <mat-card class="example-card">
-                  <mat-card-header class="bg-card">
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                    <mat-card-subtitle>{{plato?.precioPlato + '€'}}</mat-card-subtitle>
-                  </mat-card-header>
-                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
-                  <mat-card-content class="bg-card">
-                    <p>
-                      {{plato?.descripcionPlato}}
-                    </p>
-                  </mat-card-content>
-                  <mat-card-actions class="buttons-center">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
-                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
-                  </mat-card-actions>
-                </mat-card>
-            </div>
+              </mat-card-actions>
+            </mat-card>
           </div>
-        </mat-tab>
+        </div>
+      </mat-tab>
 
-        <mat-tab label="SEGUNDOS">
-          <div class="row" *ngIf="segundos$ | async as platos ">
-            <div class="col-4" *ngFor="let plato of platos">
+      <mat-tab  label="ENTRANTES">
 
-                <mat-card class="example-card">
-                  <mat-card-header class="bg-card">
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                    <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR' }}</mat-card-subtitle>
-                  </mat-card-header>
-                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
-                  <mat-card-content class="bg-card">
-                    <p>
-                      {{plato?.descripcionPlato}}
-                    </p>
-                  </mat-card-content>
-                  <mat-card-actions class="buttons-center">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
-                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
-                  </mat-card-actions>
-                </mat-card>
-            </div>
+        <div class="row" *ngIf="entrantes$ | async as platos ">
+
+          <div class="col-4" *ngFor="let plato of platos">
+
+            <mat-card class="example-card">
+              <mat-card-header class="bg-card">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
+              <mat-card-content class="bg-card">
+                <p>
+                  {{plato?.descripcionPlato}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions class="buttons-center">
+                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                  <!--  <mat-icon> border_color</mat-icon> -->
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                        <mat-icon color="">delete</mat-icon>
+                      </button> -->
+
+                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                  <mat-icon color="">delete</mat-icon>
+                </button>
+
+
+              </mat-card-actions>
+            </mat-card>
+
           </div>
-        </mat-tab>
 
-        <mat-tab label="POSTRES">
-          <div class="row" *ngIf="postres$ | async as platos ">
-            <div class="col-4" *ngFor="let plato of platos">
+        </div>
+      </mat-tab>
 
-                <mat-card class="example-card">
-                  <mat-card-header class="bg-card">
-                    <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                    <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
-                  </mat-card-header>
-                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
-                  <mat-card-content class="bg-card">
-                    <p>
-                      {{plato?.descripcionPlato}}
-                    </p>
-                  </mat-card-content>
-                  <mat-card-actions class="buttons-center">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
-                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
-                  </mat-card-actions>
-                </mat-card>
-            </div>
+      <mat-tab  label="PRIMEROS">
+        <div class="row" *ngIf="primeros$ | async as platos ">
+          <div class="col-4" *ngFor="let plato of platos">
+
+            <mat-card class="example-card">
+              <mat-card-header class="bg-card">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                <mat-card-subtitle>{{plato?.precioPlato + '€'}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
+              <mat-card-content class="bg-card">
+                <p>
+                  {{plato?.descripcionPlato}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions class="buttons-center">
+                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                  <!--  <mat-icon> border_color</mat-icon> -->
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                        <mat-icon color="">delete</mat-icon>
+                      </button> -->
+
+                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                  <mat-icon color="">delete</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
           </div>
-        </mat-tab>
+        </div>
+      </mat-tab>
 
-      </mat-tab-group>
+      <mat-tab  label="SEGUNDOS">
+        <div class="row" *ngIf="segundos$ | async as platos ">
+          <div class="col-4" *ngFor="let plato of platos">
 
-    </div>
+            <mat-card class="example-card">
+              <mat-card-header class="bg-card">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR' }}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
+              <mat-card-content class="bg-card">
+                <p>
+                  {{plato?.descripcionPlato}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions class="buttons-center">
+                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                  <!--  <mat-icon> border_color</mat-icon> -->
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                        <mat-icon color="">delete</mat-icon>
+                      </button> -->
+
+                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                  <mat-icon color="">delete</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab  label="POSTRES">
+        <div class="row" *ngIf="postres$ | async as platos ">
+          <div class="col-4" *ngFor="let plato of platos">
+
+            <mat-card class="example-card">
+              <mat-card-header class="bg-card">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
+              <mat-card-content class="bg-card">
+                <p>
+                  {{plato?.descripcionPlato}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions class="buttons-center">
+                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                  <!--  <mat-icon> border_color</mat-icon> -->
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                        <mat-icon color="">delete</mat-icon>
+                      </button> -->
+
+                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                  <mat-icon color="">delete</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </div>
 
 </div>
 
-  <!-- SPINNER -->
-  <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
+<!-- SPINNER -->
+<mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
 
-  </mat-progress-spinner>
-
-
-
+</mat-progress-spinner>
