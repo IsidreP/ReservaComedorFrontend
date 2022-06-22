@@ -13,11 +13,13 @@
       </a>
 
       <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-        <a class="nav-link" routerLink="/crear-plato">
-          <mat-list-option>
-            Crear platos
-          </mat-list-option>
-        </a>
+        <div *ngIf="usuario[0].rol.nombreRol == 'administrador'">
+          <a class="nav-link" routerLink="/crear-plato">
+            <mat-list-option>
+              Crear platos
+            </mat-list-option>
+          </a>
+        </div>
 
         <a class="nav-link" routerLink="/reserva">
           <mat-list-option>

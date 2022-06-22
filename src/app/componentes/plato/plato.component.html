@@ -24,15 +24,17 @@
               <mat-card-actions  class="buttons-center" >
 
                 <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                  <!--  <mat-icon> border_color</mat-icon> -->
-                  <mat-icon>edit</mat-icon>
-                </button>
+                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                      <!--  <mat-icon> border_color</mat-icon> -->
+                      <mat-icon>edit</mat-icon>
+                    </button>
 
-                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                  <mat-icon color="">delete</mat-icon>
-                </button>
-              </ng-container>
+                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                      <mat-icon color="">delete</mat-icon>
+                    </button>
+                  </ng-container>
+                </ng-container>
 
               </mat-card-actions>
             </mat-card>
@@ -59,20 +61,17 @@
                 </p>
               </mat-card-content>
               <mat-card-actions class="buttons-center">
-                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                  <!--  <mat-icon> border_color</mat-icon> -->
-                  <mat-icon>edit</mat-icon>
-                </button>
+                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
+                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                      <mat-icon>edit</mat-icon>
+                    </button>
 
-                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                        <mat-icon color="">delete</mat-icon>
-                      </button> -->
-
-                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                  <mat-icon color="">delete</mat-icon>
-                </button>
-
-
+                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                      <mat-icon color="">delete</mat-icon>
+                    </button>
+                  </ng-container>
+                </ng-container>
               </mat-card-actions>
             </mat-card>
 
@@ -98,18 +97,18 @@
                 </p>
               </mat-card-content>
               <mat-card-actions class="buttons-center">
-                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                  <!--  <mat-icon> border_color</mat-icon> -->
-                  <mat-icon>edit</mat-icon>
-                </button>
+                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
+                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                      <mat-icon>edit</mat-icon>
+                    </button>
 
-                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                        <mat-icon color="">delete</mat-icon>
-                      </button> -->
+                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                      <mat-icon color="">delete</mat-icon>
+                    </button>
+                  </ng-container>
+                </ng-container>
 
-                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                  <mat-icon color="">delete</mat-icon>
-                </button>
               </mat-card-actions>
             </mat-card>
           </div>
@@ -133,18 +132,17 @@
                 </p>
               </mat-card-content>
               <mat-card-actions class="buttons-center">
-                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                  <!--  <mat-icon> border_color</mat-icon> -->
-                  <mat-icon>edit</mat-icon>
-                </button>
+                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
+                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                      <mat-icon>edit</mat-icon>
+                    </button>
 
-                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                        <mat-icon color="">delete</mat-icon>
-                      </button> -->
-
-                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                  <mat-icon color="">delete</mat-icon>
-                </button>
+                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                      <mat-icon color="">delete</mat-icon>
+                    </button>
+                  </ng-container>
+                </ng-container>
               </mat-card-actions>
             </mat-card>
           </div>
@@ -168,18 +166,17 @@
                 </p>
               </mat-card-content>
               <mat-card-actions class="buttons-center">
-                <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                  <!--  <mat-icon> border_color</mat-icon> -->
-                  <mat-icon>edit</mat-icon>
-                </button>
+                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
+                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                      <mat-icon>edit</mat-icon>
+                    </button>
 
-                <!--  <button (click)="eliminarPlato(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                        <mat-icon color="">delete</mat-icon>
-                      </button> -->
-
-                <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                  <mat-icon color="">delete</mat-icon>
-                </button>
+                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                      <mat-icon color="">delete</mat-icon>
+                    </button>
+                  </ng-container>
+                </ng-container>
               </mat-card-actions>
             </mat-card>
           </div>
@@ -194,5 +191,4 @@
 
 <!-- SPINNER -->
 <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
-
 </mat-progress-spinner>

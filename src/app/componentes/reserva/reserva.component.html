@@ -30,16 +30,18 @@
         <!-- FRANJA HORARIA -->
         <mat-step [stepControl]="secondFormGroup" label="Franja horaria de la reserva">
           <form [formGroup]="secondFormGroup">
+            <ng-container *ngIf="franjas$ | async as franjas">
+              <mat-form-field color="accent" appearance="fill">
+                <mat-label>Elige la franja horaria</mat-label>
+                <mat-select formControlName="franjaReserva" name="food">
 
-            <mat-form-field color="accent" appearance="fill">
-              <mat-label>Elige la franja horaria</mat-label>
-              <mat-select formControlName="franjaReserva" name="food">
-                <mat-option *ngFor="let franja of franjas" [value]="franja.value">
-                  {{franja.value}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <p> Tu franja horaria: {{secondFormGroup.controls['franjaReserva'].value}} </p>
+                  <mat-option *ngFor="let franja of franjas" [value]="franja">
+                    {{franja.inicioFranja}} - {{franja.finFranja}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+
             <div>
               <button mat-raised-button color="accent" matStepperPrevious>Anterior</button>
               <button mat-raised-button color="accent" matStepperNext>Siguente</button>
@@ -50,50 +52,60 @@
         <!-- PLATOS -->
         <mat-step [stepControl]="thirdFormGroup" label="Platos de la reserva">
           <form [formGroup]="thirdFormGroup">
-            <!-- form ensalada -->
+            <!-- input entrante -->
             <div class="row">
               <div class="col-3">
-                <mat-form-field appearance="fill">
-                  <mat-label>Elige ensalada</mat-label>
-                  <mat-select formControlName="ensaladaPlato">
-                    <mat-option *ngFor="let ensalada of ensaladas" [value]="ensalada.value">
-                      {{ensalada.value}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <ng-container *ngIf="entrantes$ | async as entrantes">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Elige entrante</mat-label>
+                    <mat-select formControlName="entrantes">
+                      <mat-option *ngFor="let entrante of entrantes" [value]="entrante">
+                        {{entrante.nombrePlato}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
               </div>
-              <!-- form primero -->
+              <!-- input primero -->
               <div class="col-3">
-                <mat-form-field appearance="fill">
-                  <mat-label>Elige primer plato</mat-label>
-                  <mat-select formControlName="primerPlato">
-                    <mat-option *ngFor="let plato of primerPlato" [value]="plato.value">
-                      {{plato.value}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <ng-container *ngIf="primeros$ | async as primeros">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Elige primer plato</mat-label>
+                    <mat-select formControlName="primeros">
+                      <mat-option *ngFor="let primero of primeros" [value]="primero">
+                        {{primero.nombrePlato}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
               </div>
               <!-- form segundo -->
               <div class="col-3">
-                <mat-form-field appearance="fill">
-                  <mat-label>Elige segundo plato</mat-label>
-                  <mat-select formControlName="segundoPlato">
-                    <mat-option *ngFor="let plato of segundoPlato" [value]="plato.value">
-                      {{plato.value}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <ng-container *ngIf="segundos$ | async as segundos">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Elige segundo plato</mat-label>
+                    <mat-select formControlName="segundos">
+                      <mat-option *ngFor="let segundo of segundos" [value]="segundo">
+                        {{segundo.nombrePlato}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
               </div>
               <!-- form postre -->
               <div class="col-3">
-                <mat-form-field appearance="fill">
-                  <mat-label>Elige postre</mat-label>
-                  <mat-select formControlName="postrePlato">
-                    <mat-option *ngFor="let postre of postres" [value]="postre.value">
-                      {{postre.value}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                <ng-container *ngIf="postres$ | async as postres">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Elige postre</mat-label>
+                    <mat-select formControlName="postres">
+                      <mat-option *ngFor="let postre of postres" [value]="postre">
+                        <!-- <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + postre.imagenPlato}}" /> -->
+                        {{postre.nombrePlato}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </ng-container>
+
               </div>
             </div>
 
@@ -103,7 +115,7 @@
               <div class="col-4"></div>
               <div class="col-4">
                 <button mat-raised-button color="accent" matStepperPrevious>Anterior</button>
-                <button mat-raised-button color="accent" matStepperNext>Hacer reserva</button>
+                <button (click)="hacerReserva()" mat-raised-button color="accent" matStepperNext>Hacer reserva</button>
               </div>
             </div>
 
@@ -112,31 +124,38 @@
 
 
         <!-- CONFIRMACIÓN DATOS  -->
-        <!--        <mat-step [stepControl]="thirdFormGroup" label="Confirmar la reserva">
-        <form [formGroup]="thirdFormGroup">
+      <mat-step  label="Detalles de la reserva">
+        <div class="row mat-tab-body-content" *ngIf="reservasFiltradas$ | async as reservas ">
+          <div class="col-3" *ngFor="let reserva of reservas">
 
-          <mat-form-field color="accent" appearance="fill">
-            <mat-label>Elige los platos</mat-label>
-            <mat-select [(ngModel)]="selectedValue" name="food">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <p> Tu franja horaria: {{selectedValue}} </p>
-          <div>
-            <button mat-raised-button color="accent" matStepperNext>Siguente</button>
+            <mat-card class="example-card">
+              <mat-card-header class="bg-card">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{reserva?.pedirPlato.plato.nombrePlato}}</mat-card-title>
+                <mat-card-subtitle>{{reserva?.pedirPlato.plato.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+              </mat-card-header>
+              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + reserva?.pedirPlato.plato.imagenPlato}}" />
+              <mat-card-content class="bg-card">
+                <p>
+                  {{reserva?.pedirPlato.plato.descripcionPlato}}
+                </p>
+              </mat-card-content>
+
+              <mat-card-actions  class="buttons-center">
+
+              </mat-card-actions>
+            </mat-card>
           </div>
-        </form>
-      </mat-step> -->
+        </div>
+      </mat-step>
 
-        <mat-step>
-          <ng-template matStepLabel>Hecho</ng-template>
-          <p>¡Reserva hecha con éxito!</p>
-
-        </mat-step>
       </mat-stepper>
     </div>
   </div>
 
 </div>
+
+<!-- SPINNER -->
+<mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
+</mat-progress-spinner>
+

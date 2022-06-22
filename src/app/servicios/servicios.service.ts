@@ -107,4 +107,21 @@ export class ServiciosService {
   obtenerPlato(id: number) {
     return this.http.get(`${this.url}/api/platos/${id}`, this.options);
   }
+
+  /* SERVICIO CREAR RESERVA */
+  crearReserva(body: any){
+    return this.http.post(`${this.url}/api/reservas`, body, this.options);
+  }
+
+  crearPedirPlato(body: any){
+    return this.http.post(`${this.url}/api/pedirPlato`, body, this.options);
+  }
+
+  obtenerReservas(){
+    return this.http.get(`${this.url}/api/reservas`, this.options);
+  }
+
+  obtenerFranjas(){
+    return this.http.get(`${this.url}/api/franjas`, this.options);
+  }
 }

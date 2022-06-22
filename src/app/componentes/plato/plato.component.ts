@@ -29,11 +29,14 @@ export class PlatoComponent implements OnInit {
     private loader: SpinnerService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
 
     this.usuarioLogeado$ = this.servicio.usuarioLogeado$;
+
+    this.loader.show();
 
     this.todosPlatos$ = this.servicio.obtenerPlatos().pipe(shareReplay());
 
@@ -57,9 +60,11 @@ export class PlatoComponent implements OnInit {
 
     this.postres$ = this.todosPlatos$.pipe(
       map((next) => {
+        this.loader.hide();
         return next.filter((plato) => plato.categoria?.idCategoria == 4);
       })
     );
+
   }
 
   modificarPlato(id: number) {

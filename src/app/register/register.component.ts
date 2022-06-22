@@ -26,11 +26,9 @@ export const equivalentValidator = (
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  /*   [x: string]: any; */
+
   registro$: Observable<any>;
   rol: Object;
-
-  /* SPINNER */
   loading$ = this.loader.loading$;
 
   form: FormGroup = this.fb.group(
@@ -41,7 +39,6 @@ export class RegisterComponent implements OnInit {
       passwordRepetido: ['', { validators: [Validators.required] }],
     },
     {
-      // objeto con validador de contraseña
       validator: equivalentValidator('password', 'passwordRepetido'),
     }
   );
@@ -51,15 +48,13 @@ export class RegisterComponent implements OnInit {
     private servicio: ServiciosService,
     private snackBar: MatSnackBar,
     private router: Router,
-
-    /* SPINNER */
     public loader: SpinnerService
   ) {}
 
   ngOnInit(): void {}
 
   entrar() {
-    /* SPINNER */
+
     this.loader.show();
     this.registro$ = this.servicio.registro(
       this.form.controls['nombre'].value,
