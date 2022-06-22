@@ -1,189 +1,151 @@
-<div class="main-component row cdkscrollable">
+<div class="main-component row">
 
-  <div class="row">
+    <div class="row">
 
-    <mat-tab-group dynamicHeight class="mat-tab-body-content" mat-align-tabs="start">
+    <!-- BUSQUEDA  -->
+    <div id="busqueda" class="row">
+      <div class="col-1">
+        <mat-form-field class="search-style" floatLabel="never">
+          <input matInput class="maxWidthInput" name="filterPlato" placeholder="Buscar ..." [(ngModel)]="filterPlato">
+        </mat-form-field>
+      </div>
+    </div>
 
-      <mat-tab  label="TODOS">
-        <div class="row mat-tab-body-content" *ngIf="todosPlatos$ | async as platos ">
-          <div class="col-4" *ngFor="let plato of platos">
+      <mat-tab-group mat-align-tabs="start">
 
-            <mat-card class="example-card">
-              <mat-card-header class="bg-card">
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
-              </mat-card-header>
-              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
-              <mat-card-content class="bg-card">
-                <p>
-                  {{plato?.descripcionPlato}}
-                </p>
-              </mat-card-content>
 
-              <mat-card-actions  class="buttons-center" >
 
-                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                      <!--  <mat-icon> border_color</mat-icon> -->
-                      <mat-icon>edit</mat-icon>
-                    </button>
+        <mat-tab label="TODOS">
+            <div class="row" *ngIf="todosPlatos$ | async as platos ">
+              <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
 
-                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                      <mat-icon color="">delete</mat-icon>
-                    </button>
-                  </ng-container>
-                </ng-container>
+                  <mat-card class="example-card">
+                    <mat-card-header class="bg-card">
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                      <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                    <mat-card-content class="bg-card">
+                      <p>
+                        {{plato?.descripcionPlato}}
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions class="buttons-center">
+                      <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                      <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                    </mat-card-actions>
+                  </mat-card>
+              </div>
+            </div>
+        </mat-tab>
 
-              </mat-card-actions>
-            </mat-card>
+
+
+        <mat-tab label="ENTRANTES">
+
+            <div class="row" *ngIf="entrantes$ | async as platos ">
+
+              <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
+
+                  <mat-card class="example-card">
+                    <mat-card-header class="bg-card">
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                      <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                    <mat-card-content class="bg-card">
+                      <p>
+                        {{plato?.descripcionPlato}}
+                      </p>
+                    </mat-card-content>
+                    <mat-card-actions class="buttons-center">
+                      <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                      <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                    </mat-card-actions>
+                  </mat-card>
+
+              </div>
+
+            </div>
+        </mat-tab>
+
+        <mat-tab label="PRIMEROS">
+          <div class="row" *ngIf="primeros$ | async as platos ">
+            <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
+
+                <mat-card class="example-card">
+                  <mat-card-header class="bg-card">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                    <mat-card-subtitle>{{plato?.precioPlato + '€'}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                  <mat-card-content class="bg-card">
+                    <p>
+                      {{plato?.descripcionPlato}}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions class="buttons-center">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                  </mat-card-actions>
+                </mat-card>
+            </div>
           </div>
-        </div>
-      </mat-tab>
+        </mat-tab>
 
-      <mat-tab  label="ENTRANTES">
+        <mat-tab label="SEGUNDOS">
+          <div class="row" *ngIf="segundos$ | async as platos ">
+            <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
 
-        <div class="row" *ngIf="entrantes$ | async as platos ">
-
-          <div class="col-4" *ngFor="let plato of platos">
-
-            <mat-card class="example-card">
-              <mat-card-header class="bg-card">
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
-              </mat-card-header>
-              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
-              <mat-card-content class="bg-card">
-                <p>
-                  {{plato?.descripcionPlato}}
-                </p>
-              </mat-card-content>
-              <mat-card-actions class="buttons-center">
-                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-
-                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                      <mat-icon color="">delete</mat-icon>
-                    </button>
-                  </ng-container>
-                </ng-container>
-              </mat-card-actions>
-            </mat-card>
-
+                <mat-card class="example-card">
+                  <mat-card-header class="bg-card">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                    <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR' }}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                  <mat-card-content class="bg-card">
+                    <p>
+                      {{plato?.descripcionPlato}}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions class="buttons-center">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                  </mat-card-actions>
+                </mat-card>
+            </div>
           </div>
+        </mat-tab>
 
-        </div>
-      </mat-tab>
+        <mat-tab label="POSTRES">
+          <div class="row" *ngIf="postres$ | async as platos ">
+            <div class="col-4" *ngFor="let plato of platos  | filter:filterPlato">
 
-      <mat-tab  label="PRIMEROS">
-        <div class="row" *ngIf="primeros$ | async as platos ">
-          <div class="col-4" *ngFor="let plato of platos">
-
-            <mat-card class="example-card">
-              <mat-card-header class="bg-card">
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                <mat-card-subtitle>{{plato?.precioPlato + '€'}}</mat-card-subtitle>
-              </mat-card-header>
-              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
-              <mat-card-content class="bg-card">
-                <p>
-                  {{plato?.descripcionPlato}}
-                </p>
-              </mat-card-content>
-              <mat-card-actions class="buttons-center">
-                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-
-                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                      <mat-icon color="">delete</mat-icon>
-                    </button>
-                  </ng-container>
-                </ng-container>
-
-              </mat-card-actions>
-            </mat-card>
+                <mat-card class="example-card">
+                  <mat-card-header class="bg-card">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
+                    <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}"/>
+                  <mat-card-content class="bg-card">
+                    <p>
+                      {{plato?.descripcionPlato}}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions class="buttons-center">
+                    <button (click)="modificarPlato(plato.idPlato)" mat-button>MODIFICAR</button>
+                    <button (click)="eliminarPlato(plato.idPlato)" mat-button>ELIMINAR</button>
+                  </mat-card-actions>
+                </mat-card>
+            </div>
           </div>
-        </div>
-      </mat-tab>
-
-      <mat-tab  label="SEGUNDOS">
-        <div class="row" *ngIf="segundos$ | async as platos ">
-          <div class="col-4" *ngFor="let plato of platos">
-
-            <mat-card class="example-card">
-              <mat-card-header class="bg-card">
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR' }}</mat-card-subtitle>
-              </mat-card-header>
-              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
-              <mat-card-content class="bg-card">
-                <p>
-                  {{plato?.descripcionPlato}}
-                </p>
-              </mat-card-content>
-              <mat-card-actions class="buttons-center">
-                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-
-                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                      <mat-icon color="">delete</mat-icon>
-                    </button>
-                  </ng-container>
-                </ng-container>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-        </div>
-      </mat-tab>
-
-      <mat-tab  label="POSTRES">
-        <div class="row" *ngIf="postres$ | async as platos ">
-          <div class="col-4" *ngFor="let plato of platos">
-
-            <mat-card class="example-card">
-              <mat-card-header class="bg-card">
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{plato?.nombrePlato}}</mat-card-title>
-                <mat-card-subtitle>{{plato?.precioPlato | currency:'EUR'}}</mat-card-subtitle>
-              </mat-card-header>
-              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
-              <mat-card-content class="bg-card">
-                <p>
-                  {{plato?.descripcionPlato}}
-                </p>
-              </mat-card-content>
-              <mat-card-actions class="buttons-center">
-                <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-                  <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
-                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-
-                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                      <mat-icon color="">delete</mat-icon>
-                    </button>
-                  </ng-container>
-                </ng-container>
-              </mat-card-actions>
-            </mat-card>
-          </div>
-        </div>
-      </mat-tab>
-
-    </mat-tab-group>
+        </mat-tab>
+      </mat-tab-group>
 
   </div>
 

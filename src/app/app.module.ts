@@ -34,6 +34,7 @@ import { ModificarPlatoComponent } from './componentes/plato/modificar-plato/mod
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatDialogComponent } from './componentes/mat-dialog/mat-dialog.component';
 
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { MatDialogComponent } from './componentes/mat-dialog/mat-dialog.componen
     ModificarPlatoComponent,
     MatDialogComponent,
 
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

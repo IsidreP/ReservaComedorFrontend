@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
     ) { }
 
+
   ngOnInit(): void {
     this.usuarioLogeado$ = this.servicio.usuarioLogeado$;
   }

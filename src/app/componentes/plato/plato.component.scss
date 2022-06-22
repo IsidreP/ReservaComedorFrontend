@@ -99,30 +99,12 @@ mat-tab-group{
 
 /* BUSQUEDA */
 
-/*
-.button-search{
-  margin-left: 5px;
-  size-adjust:initial ;
-} */
-
-/* .button-search{
-  background-color: rgb(58, 54, 54) !important;
-  font-size: small;
+#busqueda {
+display: block;
+float: left;
+padding-left: 84%;
+width: 150px;
 }
- */
-/* .search-style {
-  font-size: small;
-  margin-right: 5px;
-
-} */
-
-/*  .maxWidthInput{
-   max-width: 15vw;
- } */
-
-/*  .example-spacer {
-  flex: 1 1 auto;
-} */
 
 /* SPINNER */
 mat-progress-spinner{

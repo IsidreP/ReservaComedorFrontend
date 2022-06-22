@@ -32,6 +32,8 @@ export class PlatoComponent implements OnInit {
   ) {
   }
 
+  filterPlato = '';
+
   ngOnInit(): void {
 
     this.usuarioLogeado$ = this.servicio.usuarioLogeado$;
