@@ -7,19 +7,19 @@
   <div class="container">
 
     <div class="row justify-content-center pt-5">
-      <mat-stepper linear class="example-stepper " [orientation]="(stepperOrientation | async)!">
+      <mat-stepper linear class="example-stepper " [orientation]="(stepperOrientation | async)!" #stepper>
 
         <!-- FECHA -->
-        <mat-step [stepControl]="firstFormGroup" label="Día de la reserva">
+        <mat-step [stepControl]="firstFormGroup" label="Día de la reserva" [editable]="editable">
           <form [formGroup]="firstFormGroup">
             <mat-form-field color="accent" appearance="fill">
               <mat-label>Elije la fecha</mat-label>
-              <input matInput formControlName="fechaReserva" [matDatepicker]="picker2">
+              <input matInput formControlName="fechaReserva" [matDatepicker]="picker2" [min]="minDate">
               <mat-hint>dia/mes/año</mat-hint>
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2 color="primary"></mat-datepicker>
             </mat-form-field>
-            <p>Tu día de reserva es: {{firstFormGroup.controls['fechaReserva'].value | date: 'dd/MM/yyyy'}}</p>
+         <!--    <p>Tu día de reserva es: {{firstFormGroup.controls['fechaReserva'].value | date: 'dd/MM/yyyy'}}</p> -->
             <div>
               <button class="button-fecha" mat-raised-button color="accent" matStepperNext>Siguente</button>
             </div>
@@ -28,7 +28,7 @@
         </mat-step>
 
         <!-- FRANJA HORARIA -->
-        <mat-step [stepControl]="secondFormGroup" label="Franja horaria de la reserva">
+        <mat-step [stepControl]="secondFormGroup" label="Franja horaria de la reserva" [editable]="editable">
           <form [formGroup]="secondFormGroup">
             <ng-container *ngIf="franjas$ | async as franjas">
               <mat-form-field color="accent" appearance="fill">
@@ -50,7 +50,7 @@
         </mat-step>
 
         <!-- PLATOS -->
-        <mat-step [stepControl]="thirdFormGroup" label="Platos de la reserva">
+        <mat-step [stepControl]="thirdFormGroup" label="Platos de la reserva" [editable]="editable">
           <form [formGroup]="thirdFormGroup">
             <!-- input entrante -->
             <div class="row">
@@ -115,7 +115,7 @@
               <div class="col-4"></div>
               <div class="col-4">
                 <button mat-raised-button color="accent" matStepperPrevious>Anterior</button>
-                <button (click)="hacerReserva()" mat-raised-button color="accent" matStepperNext>Hacer reserva</button>
+                <button mat-raised-button color="accent" matStepperNext>Siguiente</button>
               </div>
             </div>
 
@@ -123,21 +123,23 @@
         </mat-step>
 
 
-        <!-- CONFIRMACIÓN DATOS  -->
-      <mat-step  label="Detalles de la reserva">
-        <div class="row mat-tab-body-content" *ngIf="reservasFiltradas$ | async as reservas ">
-          <div class="col-3" *ngFor="let reserva of reservas">
+        <!-- DETALLES RESERVA  -->
+        <mat-step [stepControl]="forthFormGroup" label="Detalles de la reserva" [editable]="editable">
+          <div class="row mat-tab-body-content" *ngIf="platosSeleccionados$ | async as platos">
+          <!--   <h3 class="platos-seleccionados">Platos seleccionados: </h3> -->
+
+            <!-- <div class="col-3" *ngFor="let plato of Object.values(platos)">
 
             <mat-card class="example-card">
               <mat-card-header class="bg-card">
                 <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{reserva?.pedirPlato.plato.nombrePlato}}</mat-card-title>
-                <mat-card-subtitle>{{reserva?.pedirPlato.plato.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                <mat-card-title>{{plato.nombrePlato}}</mat-card-title>
+                <mat-card-subtitle>{{plato.precioPlato | currency:'EUR'}}</mat-card-subtitle>
               </mat-card-header>
-              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + reserva?.pedirPlato.plato.imagenPlato}}" />
+              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
               <mat-card-content class="bg-card">
                 <p>
-                  {{reserva?.pedirPlato.plato.descripcionPlato}}
+                  {{plato.descripcionPlato}}
                 </p>
               </mat-card-content>
 
@@ -145,9 +147,113 @@
 
               </mat-card-actions>
             </mat-card>
+          </div> -->
+
+            <div class="col-3">
+              <mat-card class="example-card">
+                <mat-card-header class="bg-card">
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{platos.entrantes.nombrePlato}}</mat-card-title>
+                  <mat-card-subtitle>{{platos.entrantes.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + platos.entrantes.imagenPlato}}" />
+                <mat-card-content class="bg-card">
+                  <p>
+                    {{platos.entrantes.descripcionPlato}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions class="buttons-center">
+
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <div class="col-3">
+              <mat-card class="example-card">
+                <mat-card-header class="bg-card">
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{platos.primeros.nombrePlato}}</mat-card-title>
+                  <mat-card-subtitle>{{platos.primeros.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + platos.primeros.imagenPlato}}" />
+                <mat-card-content class="bg-card">
+                  <p>
+                    {{platos.primeros.descripcionPlato}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions class="buttons-center">
+
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <div class="col-3">
+              <mat-card class="example-card">
+                <mat-card-header class="bg-card">
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{platos.segundos.nombrePlato}}</mat-card-title>
+                  <mat-card-subtitle>{{platos.segundos.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + platos.segundos.imagenPlato}}" />
+                <mat-card-content class="bg-card">
+                  <p>
+                    {{platos.segundos.descripcionPlato}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions class="buttons-center">
+
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <div class="col-3">
+              <mat-card class="example-card">
+                <mat-card-header class="bg-card">
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{platos.postres.nombrePlato}}</mat-card-title>
+                  <mat-card-subtitle>{{platos.postres.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + platos.postres.imagenPlato}}" />
+                <mat-card-content class="bg-card">
+                  <p>
+                    {{platos.postres.descripcionPlato}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions class="buttons-center">
+
+                </mat-card-actions>
+              </mat-card>
+            </div>
+
+            <div class="row">
+              <div class="col-4">
+
+              </div>
+              <div class="col-4">
+
+              </div>
+              <div class="col-4">
+                <h3>IMPORTE TOTAL: {{precioTotal | currency:'EUR' }}</h3>
+              </div>
+            </div>
           </div>
-        </div>
-      </mat-step>
+
+          <div class="row button-reserva">
+            <div class="col-4"></div>
+            <div class="col-4"></div>
+            <div class="col-4">
+              <button mat-raised-button color="accent" matStepperPrevious>Anterior</button>
+              <button mat-raised-button color="accent" (click)="hacerReserva() ">Confirmar reserva</button>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step [stepControl]="fifthFormGroup" label="Reserva finalizada" [completed]="completed" [editable]="editable">
+          <h3>¡Reserva hecha con exito! <mat-icon class="color-check">done_all</mat-icon></h3>
+
+
+
+
+
+      <!--     <button (click)="editable=!editable">Disable steps</button> -->
+        </mat-step>
 
       </mat-stepper>
     </div>
@@ -158,4 +264,3 @@
 <!-- SPINNER -->
 <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
 </mat-progress-spinner>
-

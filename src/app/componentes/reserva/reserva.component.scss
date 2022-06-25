@@ -41,4 +41,16 @@ mat-progress-spinner{
   z-index: 5;
 }
 
+.platos-seleccionados{
+  font-style: italic;
+}
 
+.color-check{
+  color: green !important
+}
+
+
+.example-header-image {
+  background-image: url(../../../assets/img/check-platos.jpg);
+  background-size: cover;
+}

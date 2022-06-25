@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {StepperOrientation} from '@angular/material/stepper';
-import {Observable, shareReplay, tap} from 'rxjs';
+import {MatStepper, StepperOrientation} from '@angular/material/stepper';
+import {Observable, shareReplay} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { ServiciosService } from 'src/app/servicios/servicios.service';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
@@ -16,6 +16,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ReservaComponent implements OnInit {
 
+  editable: boolean = true;
+  completed : boolean = false;
+/* isEditable = false; */
+
+  @ViewChild("stepper", { static: false }) stepper: MatStepper;
+
+  precioTotal = 0;
+
   loading$ = this.loader.loading$;
 
   franjas$: Observable<any>
@@ -26,9 +34,13 @@ export class ReservaComponent implements OnInit {
   segundos$: Observable<any>;
   postres$: Observable<any>;
 
+  platosSeleccionados$: Observable<any>;
+
   reservasFiltradas$: Observable<any>;
 
   usuario: any;
+
+  minDate = new Date
 
 
 
@@ -95,6 +107,10 @@ export class ReservaComponent implements OnInit {
     segundos: ['', Validators.required],
     postres: ['', Validators.required],
   });
+  forthFormGroup = this.fb.group({});
+  fifthFormGroup = this.fb.group({});
+
+
 
   stepperOrientation: Observable<StepperOrientation>;
 
@@ -114,6 +130,15 @@ export class ReservaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.platosSeleccionados$ = this.thirdFormGroup.valueChanges;
+
+    this.thirdFormGroup.valueChanges.subscribe(
+      (next)=> {
+        this.calcularPrecioTotal(next);
+      }
+    );
+
 
     this.servicio.usuarioLogeado$.subscribe(
       (next) => {
@@ -152,13 +177,18 @@ export class ReservaComponent implements OnInit {
   }
 
   hacerReserva() {
+    this.editable=!this.editable;
+    this.completed=!this.completed;
     this.loader.show();
+    console.log("QUE DEVUELVE THIRD-FORM-GROUP:", this.thirdFormGroup.controls);
     Object.keys(this.thirdFormGroup.controls).forEach(control => {
       this.crearPedirPlato(control);
+
     })
   }
 
   crearPedirPlato(key: string){
+
     let body = {
       usuario: {
         id: this.usuario.id
@@ -184,18 +214,33 @@ export class ReservaComponent implements OnInit {
         this.servicio.crearReserva(bodyReserva).subscribe(
            (next) => {
             console.log('respuesta al hacer una reserva: ', next);
+            this.loader.hide();
 
-            this.reservasFiltradas$ = this.servicio.obtenerReservas().pipe(
+            this.stepper.next()
+
+/*             this.reservasFiltradas$ = this.servicio.obtenerReservas().pipe(
               map((next: any) => {
                 this.loader.hide();
                 return next.filter((reserva) => reserva.pedirPlato?.usuario.id == this.usuario.id &&
                 reserva.pedirPlato?.franja.idFranja == this.secondFormGroup.controls['franjaReserva'].value.idFranja);
               })
-            )
+            ) */
            }
         )
       }
     )
+  }
+
+  calcularPrecioTotal(form?: number){
+    this.precioTotal = 0;
+
+    if(!form){
+      return
+    }
+
+    Object.values(form).forEach(control => {
+      this.precioTotal += control.precioPlato;
+    })
   }
 
 }
