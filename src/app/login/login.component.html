@@ -2,30 +2,28 @@
   <div class="container loginContainer">
 
     <div class="row">
-      <span class="loginTitle">¡Bienvenido! Identifícate para entrar en la aplicación</span>
+      <span class="loginTitle">¡Bienvenido! Identifícate para entrar en la aplicación:</span>
     </div>
     <div class="row">
       <form [formGroup]="form">
+
+        <!-- EMAIL -->
         <div class="row">
           <mat-form-field>
-
             <input matInput type="email" placeholder="Correo electrónico" formControlName="email">
-
             <mat-error *ngIf="form.get('email')?.hasError('required')">
               Campo requerido
             </mat-error>
-
             <mat-error *ngIf="form.get('email')?.hasError('email')">
               Formato inválido
             </mat-error>
-
           </mat-form-field>
         </div>
 
+        <!-- PASSWORD -->
         <div class="row">
           <mat-form-field>
             <input matInput type=password placeholder="Contraseña" formControlName="password">
-
             <mat-error *ngIf="form.get('password')?.hasError('required')">
               Campo requerido
             </mat-error>
@@ -34,6 +32,7 @@
       </form>
     </div>
 
+    <!-- BUTTON LOGUEARSE -->
     <div class="row button-acceder">
       <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
         (click)="entrarClicked()">Acceder</button>
@@ -45,8 +44,7 @@
   </div>
 
   <!-- SPINNER -->
-  <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
-
+  <mat-progress-spinner [diameter]="50" [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
   </mat-progress-spinner>
 
 </div>

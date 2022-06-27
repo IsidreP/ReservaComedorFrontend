@@ -4,68 +4,63 @@
     <div class="row">
       <span class="loginTitle">Regístrate en nuestra app</span>
     </div>
+
     <div class="row">
       <form [formGroup]="form">
 
+        <!-- NOMBRE Y APELLIDOS -->
         <div class="row">
           <mat-form-field>
-
             <input matInput type="text" placeholder="Nombre y apellidos" formControlName="nombre">
-
             <mat-error *ngIf="form.get('nombre')?.hasError('required')">
               Campo requerido
             </mat-error>
-
             <mat-error *ngIf="form.get('nombre')?.hasError('nombre')">
               Formato inválido
             </mat-error>
-
           </mat-form-field>
         </div>
 
-
+        <!-- EMAIL -->
         <div class="row">
           <mat-form-field>
-
             <input matInput type="email" placeholder="Correo electrónico" formControlName="email">
-
             <mat-error *ngIf="form.get('email')?.hasError('required')">
               Campo requerido
             </mat-error>
-
             <mat-error *ngIf="form.get('email')?.hasError('email')">
               Formato inválido
             </mat-error>
-
           </mat-form-field>
         </div>
 
+        <!-- PASSWORD -->
         <div class="row">
           <mat-form-field>
             <input matInput type=password placeholder="Contraseña" formControlName="password">
-
             <mat-error *ngIf="form.get('password')?.hasError('required')">
               Campo requerido
             </mat-error>
           </mat-form-field>
         </div>
 
+        <!-- PASSWORD REPETIDO -->
         <div class="row">
           <mat-form-field>
             <input matInput type=password placeholder="Repite la contraseña" formControlName="passwordRepetido">
             <mat-error *ngIf="form.get('passwordRepetido')?.hasError('required')">
               Campo requerido
             </mat-error>
-            <mat-error  *ngIf="form.get('passwordRepetido')?.hasError('notEqual')">
-              Passwords don't match!
+            <mat-error *ngIf="form.get('passwordRepetido')?.hasError('notEqual')">
+              ¡Contraseña no coincide!
             </mat-error>
           </mat-form-field>
         </div>
 
-
       </form>
     </div>
 
+    <!-- BOTÓN REGISTRARSE -->
     <div class="row button-registrarse">
       <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"
         (click)="entrar()">Registrarse</button>
@@ -76,8 +71,7 @@
     </div>
   </div>
 
-
   <!-- SPINNER -->
-<mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+  <mat-progress-spinner [diameter]="50" [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
 
 </div>

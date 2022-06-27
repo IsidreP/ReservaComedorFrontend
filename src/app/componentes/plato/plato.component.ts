@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, shareReplay, tap } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { ServiciosService } from 'src/app/servicios/servicios.service';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
 import { MatDialogComponent } from '../mat-dialog/mat-dialog.component';
@@ -12,6 +12,8 @@ import { MatDialogComponent } from '../mat-dialog/mat-dialog.component';
   styleUrls: ['./plato.component.scss'],
 })
 export class PlatoComponent implements OnInit {
+  filterPlato = '';
+
   todosPlatos$: Observable<any>;
   entrantes$: Observable<any>;
   primeros$: Observable<any>;
@@ -19,7 +21,6 @@ export class PlatoComponent implements OnInit {
   postres$: Observable<any>;
 
   loading$ = this.loader.loading$;
-
   usuarioLogeado$: Observable<any>;
 
   constructor(
@@ -29,17 +30,12 @@ export class PlatoComponent implements OnInit {
     private loader: SpinnerService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
-  ) {
-  }
-
-  filterPlato = '';
+  ) {}
 
   ngOnInit(): void {
-
     this.usuarioLogeado$ = this.servicio.usuarioLogeado$;
-
     this.loader.show();
-
+    // shareReplay para que cada observable-hija que proviene de todosPlatos$ no haga la petición al back
     this.todosPlatos$ = this.servicio.obtenerPlatos().pipe(shareReplay());
 
     this.entrantes$ = this.todosPlatos$.pipe(
@@ -66,7 +62,6 @@ export class PlatoComponent implements OnInit {
         return next.filter((plato) => plato.categoria?.idCategoria == 4);
       })
     );
-
   }
 
   modificarPlato(id: number) {
@@ -102,32 +97,30 @@ export class PlatoComponent implements OnInit {
         })
       );
 
-      this.loader.hide();
+
 
       console.log('Respuesta al eliminar el plato: ', next);
       this.router.navigate([`/platos/`], { relativeTo: this.route });
+      this.loader.hide();
 
       this.snackBar.open('¡Plato eliminado con éxito!', 'Cerrar', {
-        duration: 5000,
+        duration: 4000,
         verticalPosition: 'top',
       });
     });
   }
 
   openDialog(idPlato: any): void {
-   const dialogRef = this.dialog.open(MatDialogComponent, {
+    const dialogRef = this.dialog.open(MatDialogComponent, {
       width: '400px',
-      data: {idPlato: idPlato},
+      data: { idPlato: idPlato },
     });
 
-
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed', result);
-      if (result != undefined){
+      if (result != undefined) {
         this.eliminarPlato(result.idPlato);
       }
     });
   }
-
-
 }

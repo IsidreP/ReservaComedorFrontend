@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable} from 'rxjs';
 import jwt_decode from 'jwt-decode';
 
 @Injectable({
@@ -108,7 +108,6 @@ export class ServiciosService {
     return this.http.get(`${this.url}/api/platos/${id}`, this.options);
   }
 
-  /* SERVICIO CREAR RESERVA */
   crearReserva(body: any){
     return this.http.post(`${this.url}/api/reservas`, body, this.options);
   }

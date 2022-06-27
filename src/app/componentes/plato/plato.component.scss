@@ -1,6 +1,5 @@
 
 .main-component{
-
   display:block;
   height:100vh;
   max-width:100%;
@@ -17,21 +16,9 @@
   margin-top:9%;
   margin-bottom: 9%;
   margin-left: 5%;
- /*  padding-right: 5%;
-  padding-left: 5%; */
-/*   background-color: rgb(73, 65, 65); */
-/*   background-color: rgb(59, 53, 53); */
-/*   background-color: rgb(76, 69, 69); */
-/* overflow-x: hidden !important; */
 }
-
-.scroll-h {
-  overflow-x: hidden !important;
-}
-
 
 .bg-card{
- /*  background-color: rgb(58, 54, 54) !important; */
   background-color: rgb(62, 60, 60) !important;
   margin-left: 5px;
   margin-right: 5px;
@@ -40,7 +27,6 @@
   padding-left: 15px;
   padding-right: 15px;
 }
-
 
 .mat-tab-body-content {
   height: 100%;
@@ -58,7 +44,6 @@ p{
 }
 
 .buttons-center{
- /*  text-align: end; */
   display: flex;
   justify-content:space-evenly;
   margin-left: 15%;
@@ -98,7 +83,6 @@ mat-tab-group{
 }
 
 /* BUSQUEDA */
-
 #busqueda {
 display: block;
 float: left;

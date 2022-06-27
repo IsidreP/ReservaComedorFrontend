@@ -64,10 +64,12 @@
 
     <!-- botón crear nuevo plato -->
     <div class="d-grid button-crear">
-      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" (click)="modificarPlato()">Modificar
-        plato</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid" (click)="modificarPlato()">
+        Modificar plato
+      </button>
     </div>
   </div>
 </div>
 
+<!-- hace referencia a la imagen (se invoca por id) -->
 <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">

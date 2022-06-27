@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { ServiciosService } from '../servicios/servicios.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SpinnerService } from '../servicios/spinner.service';
 
-// para validar si la contraseña y contraseña repetida coinciden
+// para validar si la contraseña repetida coincide con la anterior
 export const equivalentValidator = (
   firstControlName: string,
   secondControlName: string
@@ -26,7 +26,6 @@ export const equivalentValidator = (
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-
   registro$: Observable<any>;
   rol: Object;
   loading$ = this.loader.loading$;
@@ -54,7 +53,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   entrar() {
-
     this.loader.show();
     this.registro$ = this.servicio.registro(
       this.form.controls['nombre'].value,
@@ -68,18 +66,16 @@ export class RegisterComponent implements OnInit {
 
     this.registro$.subscribe(
       (respuesta) => {
-        /* SPINNER */
         this.loader.hide();
         console.log('La respuesta es: ', respuesta);
-        // redireccionamos a la página del login
         this.router.navigate(['/login']);
-
         this.snackBar.open('¡Usted se ha registrado con éxito!', 'Cerrar', {
-          duration: 5000,
+          duration: 4000,
           verticalPosition: 'top',
         });
       },
       (error) => {
+        this.loader.hide();
         console.log('El error es: ', error);
       }
     );

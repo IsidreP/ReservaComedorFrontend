@@ -11,7 +11,6 @@ import { SpinnerService } from 'src/app/servicios/spinner.service';
   styleUrls: ['./crear-plato.component.scss'],
 })
 export class CrearPlatoComponent implements OnInit, AfterViewInit {
-
   loading$ = this.loader.loading$;
 
   form: FormGroup = this.fb.group({
@@ -58,6 +57,7 @@ export class CrearPlatoComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // pasamos la imagen a la base64
   onFileSelected(event) {
     var files = event.target.files;
     var file = files[0];
@@ -70,6 +70,14 @@ export class CrearPlatoComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // función invocada desde onFileSelected()
+  handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.form.patchValue({
+      imagen: btoa(binaryString),
+    });
+  }
+
   crearPlato() {
     this.loader.show();
     const body = {
@@ -80,27 +88,14 @@ export class CrearPlatoComponent implements OnInit, AfterViewInit {
       categoria: this.form.controls['categoria'].value,
     };
 
-    this.servicio.crearPlato(body).subscribe(
-      (next) => {
+    this.servicio.crearPlato(body).subscribe((next) => {
       this.loader.hide();
-      console.log('respuesta guardar plato: ', next);
+      console.log('Respuesta guardar plato: ', next);
       this.router.navigate([`/platos/`], { relativeTo: this.route });
-      this.snackBar.open(
-        '¡Nuevo plato creado con éxito!',
-        'Cerrar',
-        {
-          duration: 5000,
-          verticalPosition: 'top',
-        }
-      );
-    });
-
-  }
-
-  handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.form.patchValue({
-      imagen: btoa(binaryString),
+      this.snackBar.open('¡Nuevo plato creado con éxito!', 'Cerrar', {
+        duration: 4000,
+        verticalPosition: 'top',
+      });
     });
   }
 }

@@ -1,0 +1,49 @@
+<div class="listarReservasImg">
+  <div class="row mat-tab-body-content" *ngIf="todasReservas.length != 0">
+
+    <div class="row" *ngFor="let reserva of todasReservas[0]">
+
+      <mat-list role="list">
+        <mat-list-item role="listitem">Reserva hecha por: {{reserva.usuario.email}}</mat-list-item>
+        <mat-list-item role="listitem">Precio total del pedido: {{reserva.precioTotalReserva | currency:'EUR'}}
+        </mat-list-item>
+        <mat-list-item role="listitem">Franja horaria reservada: {{reserva.franja.inicioFranja}} -
+          {{reserva.franja.finFranja}}</mat-list-item>
+        <mat-list-item role="listitem">Fecha reservada: {{reserva.fechaReservada | date: 'dd/MM/yyyy'}}</mat-list-item>
+      </mat-list>
+
+
+      <!--         <h3>Reserva hecha por: {{reserva.usuario.email}}</h3>
+        <h3>Precio total del pedido: {{reserva.precioTotalReserva | currency:'EUR'}}</h3>
+        <h3>Franja horaria reservada: {{reserva.franja.inicioFranja}} - {{reserva.franja.finFranja}}</h3>
+        <h3>Fecha reservada:  {{reserva.fechaReservada | date: 'dd/MM/yyyy'}}</h3> -->
+
+      <div class="col-3" *ngFor="let plato of reserva.platos">
+        <mat-card class="example-card">
+          <mat-card-header class="bg-card">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{plato.nombrePlato}}</mat-card-title>
+            <mat-card-subtitle>{{plato.precioPlato | currency:'EUR'}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
+          <mat-card-content class="bg-card">
+            <p>
+              {{plato.descripcionPlato}}
+            </p>
+          </mat-card-content>
+
+          <mat-card-actions class="buttons-center">
+
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- SPINNER -->
+<mat-progress-spinner [diameter]="50" [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
+</mat-progress-spinner>

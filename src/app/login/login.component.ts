@@ -12,10 +12,7 @@ import { SpinnerService } from '../servicios/spinner.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   login$: Observable<any>;
-
-  /* SPINNER */
   loading$ = this.loader.loading$;
   /* color: ThemePalette = 'accent'; */
 
@@ -29,20 +26,14 @@ export class LoginComponent implements OnInit {
     private servicio: ServiciosService,
     private snackBar: MatSnackBar,
     private router: Router,
-
-    /* SPINNER */
     public loader: SpinnerService
-
   ) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   entrarClicked() {
-    /* SPINNER */
+    // mostramos el spinner mientras se procesa la petición
     this.loader.show();
-
     this.login$ = this.servicio.login(
       this.form.controls['email'].value,
       this.form.controls['password'].value
@@ -50,30 +41,24 @@ export class LoginComponent implements OnInit {
 
     this.login$.subscribe(
       (respuesta) => {
+        // ocultamos el spinner
         this.loader.hide();
-        console.log('respuesta exitosa: ', respuesta);
-
+        console.log('Respuesta exitosa: ', respuesta);
+        // guardamos el token en el localStorage
         this.servicio.setearSesion(respuesta);
-
-
-        this.snackBar.open(
-          '¡Usted se ha logueado con éxito!',
-          'Cerrar',
-          {
-            duration: 5000,
-            verticalPosition: 'top',
-          }
-        );
-
-        // redireccionamos a la página del plato
+        this.snackBar.open('¡Usted se ha logueado con éxito!', 'Cerrar', {
+          duration: 4000,
+          verticalPosition: 'top',
+        });
+        // redireccionamos a la página de los platos
         this.router.navigate(['/platos']);
       },
       (error) => {
         this.loader.hide();
         console.log('El error es: ', error);
-        // mostramos snackBar en el caso de credenciales invalidas
+        // mostramos el snackBar en el caso de las credenciales inválidas
         this.snackBar.open(
-          'Usuario no encontrado, o contraseña inválida!',
+          '¡Usuario no encontrado, o contraseña inválida!',
           'Cerrar',
           {
             duration: 4000,
@@ -83,5 +68,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
 }

@@ -2,37 +2,31 @@
   <!-- NOMBRE APP & ICONO -->
   <div class="header-style">
     <span class="app-style" routerLink="/inicio">Unstuck overfood</span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button mat-icon-button>
       <mat-icon>restaurant</mat-icon>
     </button>
   </div>
 
-
   <span class="example-spacer"></span>
-
 
   <!-- USER AREA -->
   <div class="user-area">
-
     <!-- en el caso si el usuario se ha logueado con éxito -->
     <div class="user-logged" *ngIf="usuarioLogeado$ | async as usuario; else botonLogin">
+      <!-- mostramos el nombre del último usuario que ha entrado (BehaviorSubject) -->
       {{usuario[0].email}}
-
       <button mat-icon-button matTooltip="Area personal">
         <mat-icon>person</mat-icon>
       </button>
-
       <button (click)="logoutClicked()" mat-icon-button matTooltip="Logout">
         <mat-icon color="warn">power_settings_new</mat-icon>
       </button>
-
     </div>
-
 
 <!-- (else) en el caso si el usuario NO se ha logueado con éxito  -->
     <ng-template #botonLogin>
       <button routerLink="/login" mat-icon-button matTooltip="Login">
-        <mat-icon color="">login</mat-icon>
+        <mat-icon>login</mat-icon>
       </button>
     </ng-template>
   </div>

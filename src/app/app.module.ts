@@ -35,6 +35,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatDialogComponent } from './componentes/mat-dialog/mat-dialog.component';
 
 import { FilterPipe } from './pipes/filter.pipe';
+import { ListarReservasComponent } from './componentes/reserva/listar-reservas/listar-reservas.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     MatDialogComponent,
 
     FilterPipe,
+      ListarReservasComponent,
   ],
   imports: [
     BrowserModule,

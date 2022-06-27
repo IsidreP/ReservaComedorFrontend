@@ -1,5 +1,4 @@
-<div class="main-component row cdkscrollable">
-
+<div class="main-component row">
   <div class="row">
 
     <!-- BUSQUEDA  -->
@@ -11,12 +10,13 @@
       </div>
     </div>
 
+    <!-- MAT-TAB-GROUP -->
     <mat-tab-group dynamicHeight class="mat-tab-body-content" mat-align-tabs="start">
 
-      <mat-tab  label="TODOS">
+      <!-- todos -->
+      <mat-tab label="TODOS">
         <div class="row mat-tab-body-content" *ngIf="todosPlatos$ | async as platos ">
           <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
-
             <mat-card class="example-card">
               <mat-card-header class="bg-card">
                 <div mat-card-avatar class="example-header-image"></div>
@@ -29,34 +29,28 @@
                   {{plato?.descripcionPlato}}
                 </p>
               </mat-card-content>
-
-              <mat-card-actions  class="buttons-center" >
-
+              <mat-card-actions class="buttons-center">
                 <ng-container *ngIf="usuarioLogeado$ | async as usuario">
+                  <!-- controlamos que los botones modify/delete puede ver solo el admin -->
                   <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'">
                     <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                      <!--  <mat-icon> border_color</mat-icon> -->
                       <mat-icon>edit</mat-icon>
                     </button>
-
                     <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
                       <mat-icon color="">delete</mat-icon>
                     </button>
                   </ng-container>
                 </ng-container>
-
               </mat-card-actions>
             </mat-card>
           </div>
         </div>
       </mat-tab>
 
-      <mat-tab  label="ENTRANTES">
-
+      <!-- entrantes  -->
+      <mat-tab label="ENTRANTES">
         <div class="row" *ngIf="entrantes$ | async as platos ">
-
           <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
-
             <mat-card class="example-card">
               <mat-card-header class="bg-card">
                 <div mat-card-avatar class="example-header-image"></div>
@@ -75,7 +69,6 @@
                     <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
                       <mat-icon>edit</mat-icon>
                     </button>
-
                     <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
                       <mat-icon color="">delete</mat-icon>
                     </button>
@@ -83,16 +76,14 @@
                 </ng-container>
               </mat-card-actions>
             </mat-card>
-
           </div>
-
         </div>
       </mat-tab>
 
-      <mat-tab  label="PRIMEROS">
+      <!-- primeros -->
+      <mat-tab label="PRIMEROS">
         <div class="row" *ngIf="primeros$ | async as platos ">
           <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
-
             <mat-card class="example-card">
               <mat-card-header class="bg-card">
                 <div mat-card-avatar class="example-header-image"></div>
@@ -111,23 +102,21 @@
                     <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
                       <mat-icon>edit</mat-icon>
                     </button>
-
                     <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
                       <mat-icon color="">delete</mat-icon>
                     </button>
                   </ng-container>
                 </ng-container>
-
               </mat-card-actions>
             </mat-card>
           </div>
         </div>
       </mat-tab>
 
-      <mat-tab  label="SEGUNDOS">
+      <!-- segundos -->
+      <mat-tab label="SEGUNDOS">
         <div class="row" *ngIf="segundos$ | async as platos ">
           <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
-
             <mat-card class="example-card">
               <mat-card-header class="bg-card">
                 <div mat-card-avatar class="example-header-image"></div>
@@ -146,7 +135,6 @@
                     <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
                       <mat-icon>edit</mat-icon>
                     </button>
-
                     <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
                       <mat-icon color="">delete</mat-icon>
                     </button>
@@ -158,10 +146,10 @@
         </div>
       </mat-tab>
 
-      <mat-tab  label="POSTRES">
+      <!-- postres -->
+      <mat-tab label="POSTRES">
         <div class="row" *ngIf="postres$ | async as platos ">
           <div class="col-4" *ngFor="let plato of platos | filter:filterPlato">
-
             <mat-card class="example-card">
               <mat-card-header class="bg-card">
                 <div mat-card-avatar class="example-header-image"></div>
@@ -176,16 +164,15 @@
               </mat-card-content>
               <mat-card-actions class="buttons-center">
                 <ng-container *ngIf="usuarioLogeado$ | async as usuario">
-                <!--   <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'"> -->
-                    <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-
-                    <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
-                      <mat-icon color="">delete</mat-icon>
-                    </button>
-                  </ng-container>
-               <!--  </ng-container> -->
+                  <!--   <ng-container *ngIf="usuario[0].rol.nombreRol == 'administrador'"> -->
+                  <button (click)="modificarPlato(plato.idPlato)" mat-icon-button matTooltip="Modificar">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button (click)="openDialog(plato.idPlato)" mat-icon-button matTooltip="Eliminar">
+                    <mat-icon color="">delete</mat-icon>
+                  </button>
+                </ng-container>
+                <!--  </ng-container> -->
               </mat-card-actions>
             </mat-card>
           </div>
@@ -194,6 +181,6 @@
 
     </mat-tab-group>
 
-<!-- SPINNER -->
-<mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
-</mat-progress-spinner>
+    <!-- SPINNER -->
+    <mat-progress-spinner [diameter]="50" [mode]="'indeterminate'" *ngIf="loading$ | async">
+    </mat-progress-spinner>
