@@ -12,7 +12,6 @@ import { RegisterComponent } from './register/register.component';
 import { PlatoComponent } from './componentes/plato/plato.component';
 import { ReservaComponent } from './componentes/reserva/reserva.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { InicioComponent } from './inicio/inicio.component';
 import { CrearPlatoComponent } from './componentes/plato/crear-plato/crear-plato.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -47,7 +46,6 @@ import { ListarReservasComponent } from './componentes/reserva/listar-reservas/l
     RegisterComponent,
     PlatoComponent,
     ReservaComponent,
-    InicioComponent,
     CrearPlatoComponent,
     ModificarPlatoComponent,
     MatDialogComponent,
