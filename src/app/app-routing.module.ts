@@ -5,14 +5,12 @@ import { ModificarPlatoComponent } from './componentes/plato/modificar-plato/mod
 import { PlatoComponent } from './componentes/plato/plato.component';
 import { ListarReservasComponent } from './componentes/reserva/listar-reservas/listar-reservas.component';
 import { ReservaComponent } from './componentes/reserva/reserva.component';
-import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'inicio', component: InicioComponent },
   {path: 'platos', component: PlatoComponent },
   {path: 'plato/:id', component: ModificarPlatoComponent},
   {path: 'crear-plato', component: CrearPlatoComponent },
