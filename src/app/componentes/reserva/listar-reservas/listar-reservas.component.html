@@ -12,12 +12,6 @@
         <mat-list-item role="listitem">Fecha reservada: {{reserva.fechaReservada | date: 'dd/MM/yyyy'}}</mat-list-item>
       </mat-list>
 
-
-      <!--         <h3>Reserva hecha por: {{reserva.usuario.email}}</h3>
-        <h3>Precio total del pedido: {{reserva.precioTotalReserva | currency:'EUR'}}</h3>
-        <h3>Franja horaria reservada: {{reserva.franja.inicioFranja}} - {{reserva.franja.finFranja}}</h3>
-        <h3>Fecha reservada:  {{reserva.fechaReservada | date: 'dd/MM/yyyy'}}</h3> -->
-
       <div class="col-3" *ngFor="let plato of reserva.platos">
         <mat-card class="example-card">
           <mat-card-header class="bg-card">
@@ -31,10 +25,6 @@
               {{plato.descripcionPlato}}
             </p>
           </mat-card-content>
-
-          <mat-card-actions class="buttons-center">
-
-          </mat-card-actions>
         </mat-card>
       </div>
 
@@ -42,7 +32,6 @@
   </div>
 
 </div>
-
 
 <!-- SPINNER -->
 <mat-progress-spinner [diameter]="50" [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">

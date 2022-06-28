@@ -93,15 +93,13 @@ export class PlatoComponent implements OnInit {
 
       this.postres$ = this.todosPlatos$.pipe(
         map((next) => {
+          this.loader.hide();
           return next.filter((plato) => plato.categoria?.idCategoria == 4);
         })
       );
 
-
-
       console.log('Respuesta al eliminar el plato: ', next);
       this.router.navigate([`/platos/`], { relativeTo: this.route });
-      this.loader.hide();
 
       this.snackBar.open('¡Plato eliminado con éxito!', 'Cerrar', {
         duration: 4000,

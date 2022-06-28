@@ -1,4 +1,5 @@
 <div class="loginImg">
+
   <ng-container [ngSwitch]="stepperOrientation | async">
     <div *ngSwitchCase="'horizontal'"></div>
     <div *ngSwitchCase="'vertical'"></div>
@@ -19,7 +20,7 @@
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2 color="primary"></mat-datepicker>
             </mat-form-field>
-         <!--    <p>Tu día de reserva es: {{firstFormGroup.controls['fechaReserva'].value | date: 'dd/MM/yyyy'}}</p> -->
+            <!-- <p>Tu día de reserva es: {{firstFormGroup.controls['fechaReserva'].value | date: 'dd/MM/yyyy'}}</p> -->
             <div>
               <button class="button-fecha" mat-raised-button color="accent" matStepperNext>Siguente</button>
             </div>
@@ -33,15 +34,13 @@
             <ng-container *ngIf="franjas$ | async as franjas">
               <mat-form-field color="accent" appearance="fill">
                 <mat-label>Elige la franja horaria</mat-label>
-                <mat-select formControlName="franjaReserva" name="food">
-
+                <mat-select formControlName="franjaReserva">
                   <mat-option *ngFor="let franja of franjas" [value]="franja">
                     {{franja.inicioFranja}} - {{franja.finFranja}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </ng-container>
-
             <div>
               <button mat-raised-button color="accent" matStepperPrevious>Anterior</button>
               <button mat-raised-button color="accent" matStepperNext>Siguente</button>
@@ -52,8 +51,8 @@
         <!-- PLATOS -->
         <mat-step [stepControl]="thirdFormGroup" label="Platos de la reserva" [editable]="editable">
           <form [formGroup]="thirdFormGroup">
-            <!-- input entrante -->
             <div class="row">
+              <!-- input entrante -->
               <div class="col-3">
                 <ng-container *ngIf="entrantes$ | async as entrantes">
                   <mat-form-field appearance="fill">
@@ -105,7 +104,6 @@
                     </mat-select>
                   </mat-form-field>
                 </ng-container>
-
               </div>
             </div>
 
@@ -126,29 +124,8 @@
         <!-- DETALLES RESERVA  -->
         <mat-step [stepControl]="forthFormGroup" label="Detalles de la reserva" [editable]="editable">
           <div class="row mat-tab-body-content" *ngIf="platosSeleccionados$ | async as platos">
-          <!--   <h3 class="platos-seleccionados">Platos seleccionados: </h3> -->
 
-            <!-- <div class="col-3" *ngFor="let plato of Object.values(platos)">
-
-            <mat-card class="example-card">
-              <mat-card-header class="bg-card">
-                <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>{{plato.nombrePlato}}</mat-card-title>
-                <mat-card-subtitle>{{plato.precioPlato | currency:'EUR'}}</mat-card-subtitle>
-              </mat-card-header>
-              <img mat-card-image role="img" src="{{'data:image/jpg;base64,' + plato.imagenPlato}}" />
-              <mat-card-content class="bg-card">
-                <p>
-                  {{plato.descripcionPlato}}
-                </p>
-              </mat-card-content>
-
-              <mat-card-actions  class="buttons-center">
-
-              </mat-card-actions>
-            </mat-card>
-          </div> -->
-
+            <!-- entrantes  -->
             <div class="col-3">
               <mat-card class="example-card">
                 <mat-card-header class="bg-card">
@@ -167,6 +144,8 @@
                 </mat-card-actions>
               </mat-card>
             </div>
+
+            <!-- primeros -->
             <div class="col-3">
               <mat-card class="example-card">
                 <mat-card-header class="bg-card">
@@ -185,6 +164,8 @@
                 </mat-card-actions>
               </mat-card>
             </div>
+
+            <!-- segundos -->
             <div class="col-3">
               <mat-card class="example-card">
                 <mat-card-header class="bg-card">
@@ -203,6 +184,8 @@
                 </mat-card-actions>
               </mat-card>
             </div>
+
+            <!-- postres -->
             <div class="col-3">
               <mat-card class="example-card">
                 <mat-card-header class="bg-card">
@@ -222,19 +205,17 @@
               </mat-card>
             </div>
 
+            <!-- IMPORTE TOTAL -->
             <div class="row">
-              <div class="col-4">
-
-              </div>
-              <div class="col-4">
-
-              </div>
+              <div class="col-4"></div>
+              <div class="col-4"></div>
               <div class="col-4">
                 <h3>IMPORTE TOTAL: {{precioTotal | currency:'EUR' }}</h3>
               </div>
             </div>
           </div>
 
+          <!-- BOTONES ANTERIOR/CONFIRMAR RESERVA -->
           <div class="row button-reserva">
             <div class="col-4"></div>
             <div class="col-4"></div>
@@ -245,22 +226,19 @@
           </div>
         </mat-step>
 
-        <mat-step [stepControl]="fifthFormGroup" label="Reserva finalizada" [completed]="completed" [editable]="editable">
-          <h3>¡Reserva hecha con exito! <mat-icon class="color-check">done_all</mat-icon></h3>
-
-
-
-
-
-      <!--     <button (click)="editable=!editable">Disable steps</button> -->
+        <!-- RESERVA FINALIZADA -->
+        <mat-step [stepControl]="fifthFormGroup" label="Reserva finalizada" [completed]="completed"
+          [editable]="editable">
+          <h3>¡Reserva hecha con exito!
+            <mat-icon class="color-check">done_all</mat-icon>
+          </h3>
         </mat-step>
 
       </mat-stepper>
     </div>
   </div>
-
 </div>
 
 <!-- SPINNER -->
-<mat-progress-spinner  [diameter]="50" [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
+<mat-progress-spinner [diameter]="50" [mode]="'indeterminate'" *ngIf="loading$ | async" [color]="color">
 </mat-progress-spinner>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { from, Observable } from 'rxjs';
 import { ServiciosService } from 'src/app/servicios/servicios.service';
 import { SpinnerService } from 'src/app/servicios/spinner.service';
 
@@ -26,7 +25,6 @@ export class ListarReservasComponent implements OnInit {
 
   filtrarReservas(respuesta: any) {
     let reservas = [];
-
     let usuarios = [];
     let franjas = [];
 
@@ -40,39 +38,23 @@ export class ListarReservasComponent implements OnInit {
       };
 
       if (
-        (usuarios.findIndex(
-          (usuario) => usuario.id == reserva.pedirPlato.usuario.id
-        ) == -1) || (franjas.findIndex(
-          (franja) => franja.idFranja == reserva.pedirPlato.franja.idFranja
-        ) == -1)
+        usuarios.findIndex(
+          (usuario) => usuario.id == reserva.pedirPlato.usuario.id) == -1 ||
+        franjas.findIndex(
+          (franja) => franja.idFranja == reserva.pedirPlato.franja.idFranja) == -1
       ) {
         nuestraReserva.usuario = reserva.pedirPlato.usuario;
-
         nuestraReserva.fechaReservada = reserva.fechaReservada;
-
         nuestraReserva.franja = reserva.pedirPlato.franja;
-
         franjas.push(reserva.pedirPlato.franja);
-
         usuarios.push(reserva.pedirPlato.usuario);
       }
-
-      // if (
-      //   franjas.findIndex(
-      //     (franja) => franja.idFranja == reserva.pedirPlato.franja.idFranja
-      //   ) == -1
-      // ) {
-      //   nuestraReserva.franja = reserva.pedirPlato.franja;
-
-      //   franjas.push(reserva.pedirPlato.franja);
-      // }
 
       if (nuestraReserva.usuario['id'] != undefined) {
         reservas.push(nuestraReserva);
       }
     });
 
-    // cuando idUsuario == reserva.usuario.idUsuario && idFranja == reserva.franja.idFranja
     respuesta.forEach((reserva) => {
       reservas.forEach((nuestraReserva) => {
         let importeTotalReserva = 0;
@@ -88,7 +70,6 @@ export class ListarReservasComponent implements OnInit {
     });
 
     console.log(reservas);
-
     this.todasReservas.push(reservas);
     this.loader.hide();
   }
