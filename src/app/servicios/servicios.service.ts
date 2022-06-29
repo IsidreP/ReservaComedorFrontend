@@ -11,6 +11,7 @@ export class ServiciosService {
   token: string;
   decodedToken: any;
   usuarioLogeado$ = new BehaviorSubject<any>('');
+  sidebarState$ = new BehaviorSubject<boolean>(false);
 
   options: any;
 
@@ -122,5 +123,9 @@ export class ServiciosService {
 
   obtenerFranjas(){
     return this.http.get(`${this.url}/api/franjas`, this.options);
+  }
+
+  toggleSidebarState(arg: boolean){
+    this.sidebarState$.next(arg);
   }
 }

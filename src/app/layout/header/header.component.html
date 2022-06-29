@@ -1,6 +1,10 @@
 <mat-toolbar>
   <!-- NOMBRE APP & ICONO -->
   <div class="header-style">
+    <button (click)="toggleSidebar()" mat-icon-button>
+      <mat-icon>reorder</mat-icon>
+    </button>
+
     <span class="app-style" routerLink="/inicio">Unstuck overfood</span>
     <button mat-icon-button>
       <mat-icon>restaurant</mat-icon>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { ServiciosService } from 'src/app/servicios/servicios.service';
 
 @Component({
@@ -27,5 +27,19 @@ export class HeaderComponent implements OnInit {
     this.servicio.logout();
     // redireccionamos a la página del login
     this.router.navigate(['/login']);
+  }
+
+  toggleSidebar(){
+    this.servicio.sidebarState$.pipe(
+      take(1)
+      ).subscribe(
+      (next) => {
+        if(next == true){
+          this.servicio.toggleSidebarState(false);
+        }else {
+          this.servicio.toggleSidebarState(true);
+        }
+      }
+    )
   }
 }
