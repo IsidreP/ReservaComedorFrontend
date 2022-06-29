@@ -11,7 +11,7 @@ export class ServiciosService {
   token: string;
   decodedToken: any;
   usuarioLogeado$ = new BehaviorSubject<any>('');
-  sidebarState$ = new BehaviorSubject<boolean>(false);
+  sidebarState$ = new BehaviorSubject<boolean>(true);
 
   options: any;
 
